@@ -176,7 +176,7 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
   return (
     <div className="flex flex-col xl:flex-row gap-8 w-full max-w-7xl mx-auto p-4 lg:p-8">
       {/* Professional Editor Side */}
-      <div className="w-full xl:w-1/3 space-y-6">
+      <div className="w-full xl:w-1/3 space-y-6 order-2 xl:order-1">
         <div className="bg-white p-6 rounded-xl shadow-xl border-t-4 border-blue-900">
            <div className="flex justify-between items-center border-b pb-4 mb-4 gap-2">
              <h3 className="text-xl font-black text-blue-900">Salary Components</h3>
@@ -289,129 +289,132 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
       </div>
 
       {/* Live Preview Side */}
-      <div className="w-full xl:w-2/3 flex flex-col items-center">
+      <div className="w-full xl:w-2/3 flex flex-col items-center order-1 xl:order-2">
         {/* Ad Placement: Top of Preview */}
         <div className="w-full mb-4">
            <AdUnit slotId="salary-preview-top" />
         </div>
 
-        <div className="w-full bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl p-4 lg:p-12 flex justify-center items-start overflow-auto">
-          <div ref={slipRef} className="bg-white shadow-2xl min-w-[700px] text-sm font-sans">
-             {/* Slip Header */}
-             <div className="bg-blue-900 text-white p-6 text-center">
-               <h1 className="text-2xl font-black uppercase tracking-widest mb-1">{data.companyName || 'COMPANY NAME'}</h1>
-               <p className="text-blue-200 text-xs font-bold tracking-[0.2em] uppercase">Payslip for the period of {data.monthYear || 'MONTH YYYY'}</p>
-             </div>
+        <div className="w-full bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl p-4 lg:p-12 flex justify-center items-start overflow-hidden">
+          {/* Responsive Scaling Wrapper for Salary Slip */}
+          <div className="transform scale-[0.45] sm:scale-[0.6] md:scale-[0.8] xl:scale-100 origin-top transition-all duration-300">
+             <div ref={slipRef} className="bg-white shadow-2xl min-w-[700px] text-sm font-sans">
+                {/* Slip Header */}
+                <div className="bg-blue-900 text-white p-6 text-center">
+                  <h1 className="text-2xl font-black uppercase tracking-widest mb-1">{data.companyName || 'COMPANY NAME'}</h1>
+                  <p className="text-blue-200 text-xs font-bold tracking-[0.2em] uppercase">Payslip for the period of {data.monthYear || 'MONTH YYYY'}</p>
+                </div>
 
-             <div className="p-8">
-               {/* Employee Info Grid */}
-               <div className="grid grid-cols-2 gap-y-4 gap-x-12 mb-8 text-gray-700 border-b pb-8">
-                 <div className="flex justify-between border-b border-dashed pb-1">
-                   <span className="font-bold text-gray-500 text-xs uppercase">Employee Name</span>
-                   <span className="font-bold">{data.employeeName}</span>
-                 </div>
-                 <div className="flex justify-between border-b border-dashed pb-1">
-                   <span className="font-bold text-gray-500 text-xs uppercase">Employee ID</span>
-                   <span className="font-bold font-mono">{data.employeeId || '---'}</span>
-                 </div>
-                 <div className="flex justify-between border-b border-dashed pb-1">
-                   <span className="font-bold text-gray-500 text-xs uppercase">Designation</span>
-                   <span className="font-bold">{data.designation}</span>
-                 </div>
-                 <div className="flex justify-between border-b border-dashed pb-1">
-                   <span className="font-bold text-gray-500 text-xs uppercase">Bank Name</span>
-                   <span className="font-bold">HDFC Bank</span>
-                 </div>
-               </div>
-
-               {/* Financial Table */}
-               <div className="flex border border-gray-200 mb-8">
-                 {/* Earnings Column */}
-                 <div className="w-1/2 border-r border-gray-200">
-                    <div className="bg-green-50 p-2 font-black text-green-800 text-xs uppercase border-b border-gray-200 flex justify-between">
-                      <span>Earnings</span>
-                      <span>Amount (₹)</span>
+                <div className="p-8">
+                  {/* Employee Info Grid */}
+                  <div className="grid grid-cols-2 gap-y-4 gap-x-12 mb-8 text-gray-700 border-b pb-8">
+                    <div className="flex justify-between border-b border-dashed pb-1">
+                      <span className="font-bold text-gray-500 text-xs uppercase">Employee Name</span>
+                      <span className="font-bold">{data.employeeName}</span>
                     </div>
-                    <div className="p-4 space-y-3">
-                       <Row label="Basic Salary" value={data.basicSalary} />
-                       <Row label="HRA" value={data.hra} />
-                       <Row label="Conveyance" value={data.conveyance} />
-                       <Row label="Medical" value={data.medical} />
-                       <Row label="Special Allowance" value={data.specialAllowance} />
+                    <div className="flex justify-between border-b border-dashed pb-1">
+                      <span className="font-bold text-gray-500 text-xs uppercase">Employee ID</span>
+                      <span className="font-bold font-mono">{data.employeeId || '---'}</span>
                     </div>
-                 </div>
-
-                 {/* Deductions Column */}
-                 <div className="w-1/2">
-                    <div className="bg-red-50 p-2 font-black text-red-800 text-xs uppercase border-b border-gray-200 flex justify-between">
-                      <span>Deductions</span>
-                      <span>Amount (₹)</span>
+                    <div className="flex justify-between border-b border-dashed pb-1">
+                      <span className="font-bold text-gray-500 text-xs uppercase">Designation</span>
+                      <span className="font-bold">{data.designation}</span>
                     </div>
-                    <div className="p-4 space-y-3">
-                       <Row label="Provident Fund" value={data.pf} />
-                       <Row label="Professional Tax" value={data.tax} />
-                       <Row label="Other Deductions" value={data.otherDeductions} />
+                    <div className="flex justify-between border-b border-dashed pb-1">
+                      <span className="font-bold text-gray-500 text-xs uppercase">Bank Name</span>
+                      <span className="font-bold">HDFC Bank</span>
                     </div>
-                 </div>
-               </div>
-
-               {/* Totals Row */}
-               <div className="flex bg-gray-50 border border-gray-200 mb-8 font-bold">
-                  <div className="w-1/2 p-3 flex justify-between text-green-700 border-r border-gray-200">
-                     <span>Total Earnings</span>
-                     <span>₹ {totals.earnings.toLocaleString()}</span>
                   </div>
-                  <div className="w-1/2 p-3 flex justify-between text-red-700">
-                     <span>Total Deductions</span>
-                     <span>₹ {totals.deductions.toLocaleString()}</span>
-                  </div>
-               </div>
 
-               {/* Net Pay */}
-               <div className="bg-blue-50 border border-blue-100 p-4 flex justify-between items-center rounded-lg mb-12">
-                 <div>
-                   <p className="text-xs font-bold text-blue-800 uppercase tracking-wider mb-1">Net Salary Payable</p>
-                   <p className="text-xs text-blue-600 italic">**Transferred to Bank Account</p>
-                 </div>
-                 <div className="text-right">
-                   <p className="text-3xl font-black text-blue-900">₹ {totals.net.toLocaleString()}</p>
-                 </div>
-               </div>
-
-               {/* Footer Signatures with Auto-Generated Stamp */}
-               <div className="flex justify-between items-end mt-12 pt-8">
-                  <div className="text-center relative">
-                    <p className="text-xs font-bold mb-1">For {data.companyName || 'Company'}</p>
-                    
-                    {/* Digital Rubber Stamp */}
-                    <div className="absolute -top-16 left-4 w-28 h-28 border-4 border-purple-900 rounded-full opacity-70 transform -rotate-12 flex items-center justify-center pointer-events-none mix-blend-multiply">
-                        <div className="w-[90%] h-[90%] border-2 border-dashed border-purple-900 rounded-full flex flex-col items-center justify-center p-2 text-center leading-none">
-                           <span className="text-[6px] font-black text-purple-900 uppercase">Authorized</span>
-                           <span className="text-[6px] font-black text-purple-900 uppercase my-0.5">***</span>
-                           <span className="text-[6px] font-black text-purple-900 uppercase">{data.companyName?.substring(0, 20) || 'COMPANY'}</span>
-                           <span className="text-[6px] font-black text-purple-900 uppercase mt-1">HR Dept.</span>
+                  {/* Financial Table */}
+                  <div className="flex border border-gray-200 mb-8">
+                    {/* Earnings Column */}
+                    <div className="w-1/2 border-r border-gray-200">
+                        <div className="bg-green-50 p-2 font-black text-green-800 text-xs uppercase border-b border-gray-200 flex justify-between">
+                          <span>Earnings</span>
+                          <span>Amount (₹)</span>
+                        </div>
+                        <div className="p-4 space-y-3">
+                          <Row label="Basic Salary" value={data.basicSalary} />
+                          <Row label="HRA" value={data.hra} />
+                          <Row label="Conveyance" value={data.conveyance} />
+                          <Row label="Medical" value={data.medical} />
+                          <Row label="Special Allowance" value={data.specialAllowance} />
                         </div>
                     </div>
 
-                    {/* Cursive Signature */}
-                    <div className="relative z-10 font-['Great_Vibes'] text-2xl text-blue-900 mb-1">
-                        Auth. Signatory
+                    {/* Deductions Column */}
+                    <div className="w-1/2">
+                        <div className="bg-red-50 p-2 font-black text-red-800 text-xs uppercase border-b border-gray-200 flex justify-between">
+                          <span>Deductions</span>
+                          <span>Amount (₹)</span>
+                        </div>
+                        <div className="p-4 space-y-3">
+                          <Row label="Provident Fund" value={data.pf} />
+                          <Row label="Professional Tax" value={data.tax} />
+                          <Row label="Other Deductions" value={data.otherDeductions} />
+                        </div>
                     </div>
-                    
-                    <div className="w-40 border-b-2 border-gray-300"></div>
-                    <p className="text-[10px] text-gray-400 font-bold uppercase mt-1">Authorized Signatory</p>
                   </div>
 
-                  <div className="text-center">
-                     <div className="h-8"></div> {/* Spacer for alignment */}
-                     <div className="w-40 border-b-2 border-gray-300 mb-1"></div>
-                     <p className="text-[10px] text-gray-400 font-bold uppercase">Employee Signature</p>
+                  {/* Totals Row */}
+                  <div className="flex bg-gray-50 border border-gray-200 mb-8 font-bold">
+                      <div className="w-1/2 p-3 flex justify-between text-green-700 border-r border-gray-200">
+                        <span>Total Earnings</span>
+                        <span>₹ {totals.earnings.toLocaleString()}</span>
+                      </div>
+                      <div className="w-1/2 p-3 flex justify-between text-red-700">
+                        <span>Total Deductions</span>
+                        <span>₹ {totals.deductions.toLocaleString()}</span>
+                      </div>
                   </div>
-               </div>
-               
-               <div className="text-center mt-8 text-[10px] text-gray-300">
-                  This is a computer generated document.
-               </div>
+
+                  {/* Net Pay */}
+                  <div className="bg-blue-50 border border-blue-100 p-4 flex justify-between items-center rounded-lg mb-12">
+                    <div>
+                      <p className="text-xs font-bold text-blue-800 uppercase tracking-wider mb-1">Net Salary Payable</p>
+                      <p className="text-xs text-blue-600 italic">**Transferred to Bank Account</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-3xl font-black text-blue-900">₹ {totals.net.toLocaleString()}</p>
+                    </div>
+                  </div>
+
+                  {/* Footer Signatures with Auto-Generated Stamp */}
+                  <div className="flex justify-between items-end mt-12 pt-8">
+                      <div className="text-center relative">
+                        <p className="text-xs font-bold mb-1">For {data.companyName || 'Company'}</p>
+                        
+                        {/* Digital Rubber Stamp */}
+                        <div className="absolute -top-16 left-4 w-28 h-28 border-4 border-purple-900 rounded-full opacity-70 transform -rotate-12 flex items-center justify-center pointer-events-none mix-blend-multiply">
+                            <div className="w-[90%] h-[90%] border-2 border-dashed border-purple-900 rounded-full flex flex-col items-center justify-center p-2 text-center leading-none">
+                              <span className="text-[6px] font-black text-purple-900 uppercase">Authorized</span>
+                              <span className="text-[6px] font-black text-purple-900 uppercase my-0.5">***</span>
+                              <span className="text-[6px] font-black text-purple-900 uppercase">{data.companyName?.substring(0, 20) || 'COMPANY'}</span>
+                              <span className="text-[6px] font-black text-purple-900 uppercase mt-1">HR Dept.</span>
+                            </div>
+                        </div>
+
+                        {/* Cursive Signature */}
+                        <div className="relative z-10 font-['Great_Vibes'] text-2xl text-blue-900 mb-1">
+                            Auth. Signatory
+                        </div>
+                        
+                        <div className="w-40 border-b-2 border-gray-300"></div>
+                        <p className="text-[10px] text-gray-400 font-bold uppercase mt-1">Authorized Signatory</p>
+                      </div>
+
+                      <div className="text-center">
+                        <div className="h-8"></div> {/* Spacer for alignment */}
+                        <div className="w-40 border-b-2 border-gray-300 mb-1"></div>
+                        <p className="text-[10px] text-gray-400 font-bold uppercase">Employee Signature</p>
+                      </div>
+                  </div>
+                  
+                  <div className="text-center mt-8 text-[10px] text-gray-300">
+                      This is a computer generated document.
+                  </div>
+                </div>
              </div>
           </div>
         </div>

@@ -287,7 +287,7 @@ const App: React.FC = () => {
 
       {/* MODE: COURSE CERTIFICATE (Existing Logic) */}
       {mode === 'course' && (
-        <div className="flex flex-col lg:flex-row flex-1">
+        <div className="flex flex-col lg:flex-row flex-1 overflow-hidden h-[calc(100vh-64px)]">
           {isPreviewMode && (
             <div className="fixed top-0 left-0 w-full z-[100] bg-blue-900 text-white p-3 flex justify-between items-center no-print shadow-2xl border-b-2 border-yellow-500">
               <div className="flex items-center space-x-3">
@@ -304,7 +304,7 @@ const App: React.FC = () => {
           )}
 
           {!isPreviewMode && (
-            <div className="w-full lg:w-[400px] bg-white shadow-2xl p-6 overflow-y-auto no-print lg:h-[calc(100vh-64px)] flex flex-col z-20 lg:border-r-4 lg:border-blue-900">
+            <div className="w-full lg:w-[400px] bg-white shadow-2xl p-6 overflow-y-auto no-print h-full flex flex-col z-20 lg:border-r-4 lg:border-blue-900">
               <div className="space-y-4 flex-1">
                 <div className="flex items-center justify-between p-3 bg-blue-900 text-white rounded-xl shadow-lg">
                   <div>
@@ -411,8 +411,9 @@ const App: React.FC = () => {
             </div>
           )}
 
-          <div className={`flex-1 bg-gray-300 flex items-center justify-center overflow-auto ${isPreviewMode ? 'p-0' : 'p-12'}`}>
-            <div className={`${isPreviewMode ? 'scale-100' : 'scale-[0.4] sm:scale-[0.5] md:scale-[0.6] lg:scale-[0.8] xl:scale-100'} origin-center transition-all duration-500`}>
+          <div className={`flex-1 bg-gray-300 flex items-center justify-center overflow-auto ${isPreviewMode ? 'p-0' : 'p-4 lg:p-12'}`}>
+            {/* Improved Scaling for Certificate - Responsive Transform */}
+            <div className={`${isPreviewMode ? 'scale-100' : 'scale-[0.28] sm:scale-[0.5] md:scale-[0.6] lg:scale-[0.45] xl:scale-[0.7] 2xl:scale-[0.9]'} origin-center transition-all duration-500 shadow-2xl`}>
               <Certificate 
                 data={data} 
                 certInfo={certInfo} 
