@@ -18,7 +18,7 @@ const AdUnit: React.FC<AdUnitProps> = ({ slotId = "1234567890", format = "auto",
   }, []);
 
   // Replace 'ca-pub-XXXXXXXXXXXXXXXX' with your actual Publisher ID from Google AdSense
-  const PUBLISHER_ID = "ca-pub-0000000000000000"; 
+  const PUBLISHER_ID = "ca-pub-9196805139260752"; 
 
   return (
     <div className={`text-center my-6 overflow-hidden ${className}`}>
