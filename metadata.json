@@ -1,0 +1,7 @@
+{
+  "name": "FormatHub - Free Certificate Generator",
+  "description": "Generate high-quality, government-style computer course certificates with student photos and names, downloadable as PDF on FormatHub.in.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
