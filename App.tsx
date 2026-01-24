@@ -1,14 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import LandingPage from './components/LandingPage';
 import CertificateGenerator from './components/CertificateGenerator';
 import SalarySlipGenerator from './components/SalarySlipGenerator';
 import ExperienceCertificate from './components/ExperienceCertificate';
 import ResumeBuilder from './components/ResumeBuilder';
 import { AboutUs, PrivacyPolicy, TermsOfService } from './components/InfoPages';
+import SEO from './components/SEO';
 import { SalaryData, ExperienceData } from './types';
-
-// Define the type for the current view/mode
-type AppMode = 'landing' | 'course' | 'salary' | 'experience' | 'resume' | 'about' | 'privacy' | 'terms';
 
 const INITIAL_SALARY_DATA: SalaryData = {
   companyName: '', employeeName: '', designation: '', monthYear: '', employeeId: '',
@@ -22,7 +20,19 @@ const INITIAL_EXPERIENCE_DATA: ExperienceData = {
 };
 
 const App: React.FC = () => {
-  const [mode, setMode] = useState<AppMode>('landing');
+  const [route, setRoute] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => setRoute(window.location.pathname);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigate = (path: string) => {
+    window.history.pushState({}, '', path);
+    setRoute(path);
+    window.scrollTo(0, 0); // Scroll to top on page change
+  };
 
   // State for Salary Slip Generator
   const [salaryData, setSalaryData] = useState<SalaryData>(INITIAL_SALARY_DATA);
@@ -40,10 +50,8 @@ const App: React.FC = () => {
   const handleExperienceDownload = async () => {
     if (!experiencePreviewRef.current) return;
     try {
-      // Temporarily scale up for better quality
       experiencePreviewRef.current.style.transform = 'scale(1)';
       await new Promise(r => setTimeout(r, 100));
-
       const canvas = await (window as any).html2canvas(experiencePreviewRef.current, { scale: 3, useCORS: true });
       const imgData = canvas.toDataURL('image/jpeg', 1.0);
       const { jsPDF } = (window as any).jspdf;
@@ -56,63 +64,75 @@ const App: React.FC = () => {
       console.error("PDF generation failed:", error);
       alert('Failed to generate PDF.');
     } finally {
-        // Restore original scale
        if (experiencePreviewRef.current) {
           experiencePreviewRef.current.style.transform = 'scale(0.7)';
        }
     }
   };
 
-  const handleBack = () => setMode('landing');
-
   const renderHeader = (title: string) => (
     <header className="bg-blue-900 text-white p-4 flex justify-between items-center shadow-lg z-50 sticky top-0 no-print">
-      <button onClick={handleBack} className="font-bold text-sm hover:text-yellow-400 transition-colors">← Back to Home</button>
+      <button onClick={() => navigate('/')} className="font-bold text-sm hover:text-yellow-400 transition-colors">← Back to Home</button>
       <h1 className="font-black text-lg md:text-xl text-center">Format<span className="text-yellow-500">Hub</span> | {title}</h1>
       <div style={{ minWidth: '120px' }} /> {/* Spacer */}
     </header>
   );
 
-  switch (mode) {
-    case 'course':
-      return <CertificateGenerator onBack={handleBack} />;
-    
-    case 'salary':
-      return (
-        <div className="min-h-screen bg-gray-100">
-          {renderHeader('Salary Slip Generator')}
-          <SalarySlipGenerator data={salaryData} onChange={handleSalaryChange} />
-        </div>
-      );
+  const renderComponent = () => {
+    switch (route) {
+      case '/certificate-generator':
+        return (
+          <>
+            <SEO title="Free Certificate Generator | Create & Download PDF" description="Easily create professional computer course certificates. Upload student name and photo, choose a design, and download a high-quality PDF for free on FormatHub.in." />
+            <CertificateGenerator onBack={() => navigate('/')} />
+          </>
+        );
+      case '/salary-slip-generator':
+        return (
+          <div className="min-h-screen bg-gray-100">
+            <SEO title="Free Salary Slip Generator | Download PDF/Excel" description="Generate professional salary slips with automatic calculations for HRA, PF, and taxes. Download in both PDF and editable Excel formats for free." />
+            {renderHeader('Salary Slip Generator')}
+            <SalarySlipGenerator data={salaryData} onChange={handleSalaryChange} />
+          </div>
+        );
+      case '/experience-letter-generator':
+        return (
+          <div className="min-h-screen bg-gray-100">
+            <SEO title="Experience Letter Generator | Free PDF Download" description="Create official experience and relieving letters in a professional format. Fill in the details and download a print-ready PDF instantly." />
+            {renderHeader('Experience Letter Generator')}
+            <ExperienceCertificate 
+              data={experienceData} 
+              onChange={handleExperienceChange} 
+              onDownload={handleExperienceDownload} 
+              previewRef={experiencePreviewRef}
+            />
+          </div>
+        );
+      case '/resume-builder':
+        return (
+          <div className="min-h-screen bg-gray-100 flex flex-col h-screen">
+            <SEO title="AI Resume Builder | 100+ Free ATS Templates (1-5 Pages)" description="India's best AI resume builder. Get pre-filled, ATS-friendly templates for any job role. Create and download a 1, 2, or 5-page professional resume in minutes." />
+            {renderHeader('AI Resume Builder')}
+            <ResumeBuilder />
+          </div>
+        );
+      case '/about':
+        return <AboutUs onBack={() => navigate('/')} />;
+      case '/privacy':
+        return <PrivacyPolicy onBack={() => navigate('/')} />;
+      case '/terms':
+        return <TermsOfService onBack={() => navigate('/')} />;
+      default:
+        return (
+          <>
+            <SEO title="FormatHub: Free AI Resume Builder & Document Generators" description="India's #1 free platform to create professional multi-page resumes with AI, generate salary slips, experience letters, and high-quality course certificates." />
+            <LandingPage navigate={navigate} />
+          </>
+        );
+    }
+  };
 
-    case 'experience':
-      return (
-        <div className="min-h-screen bg-gray-100">
-          {renderHeader('Experience Letter Generator')}
-          <ExperienceCertificate 
-            data={experienceData} 
-            onChange={handleExperienceChange} 
-            onDownload={handleExperienceDownload} 
-            previewRef={experiencePreviewRef}
-          />
-        </div>
-      );
-    
-    case 'resume':
-      return (
-        <div className="min-h-screen bg-gray-100 flex flex-col h-screen">
-           {renderHeader('AI Resume Builder')}
-          <ResumeBuilder />
-        </div>
-      );
-
-    case 'about': return <AboutUs onBack={handleBack} />;
-    case 'privacy': return <PrivacyPolicy onBack={handleBack} />;
-    case 'terms': return <TermsOfService onBack={handleBack} />;
-    
-    default:
-      return <LandingPage onStart={(selectedMode) => setMode(selectedMode || 'resume')} onNavigate={setMode} />;
-  }
+  return renderComponent();
 };
 
 export default App;
