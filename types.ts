@@ -45,6 +45,7 @@ export interface SalaryData {
   basicSalary: number;
   hra: number;
   conveyance: number;
+
   medical: number;
   specialAllowance: number;
   pf: number;
@@ -64,4 +65,57 @@ export interface ExperienceData {
 
 export interface ApiResponse {
   text: string;
+}
+
+// --- NEW RESUME TYPES ---
+
+export type ResumeDesign = 'modern' | 'classic' | 'creative';
+
+export interface PersonalDetails {
+  name: string;
+  title: string;
+  email: string;
+  phone: string;
+  location: string;
+  linkedin: string;
+  github: string;
+}
+
+export interface WorkExperience {
+  title: string;
+  company: string;
+  duration: string;
+  description: string[];
+}
+
+export interface Education {
+  degree: string;
+  institution: string;
+  duration: string;
+}
+
+export interface Project {
+  name: string;
+  description: string;
+  techStack: string;
+}
+
+export interface Certification {
+  name: string;
+  issuer: string;
+  date: string;
+}
+
+export interface ResumeData {
+  personalDetails: PersonalDetails;
+  summary: string;
+  experience: WorkExperience[];
+  education: Education[];
+  skills: {
+    languages: string[];
+    frameworks: string[];
+    tools: string[];
+  };
+  projects: Project[];
+  certifications?: Certification[];
 }

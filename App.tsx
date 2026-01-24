@@ -5,6 +5,8 @@ import Certificate from './components/Certificate';
 import SalarySlipGenerator from './components/SalarySlipGenerator';
 import ExperienceCertificate from './components/ExperienceCertificate';
 import LandingPage from './components/LandingPage';
+import ResumeBuilder from './components/ResumeBuilder'; // Import the new component
+import { AboutUs, PrivacyPolicy, TermsOfService } from './components/InfoPages';
 import { generateAuthenticDetails } from './services/geminiService';
 
 const INITIAL_DATA: CertificateData = {
@@ -66,10 +68,11 @@ const THEMES: { id: ThemeType; name: string; color: string }[] = [
   { id: 'slate-gray', name: 'Slate Official', color: '#475569' },
 ];
 
-type AppMode = 'course' | 'salary' | 'experience';
+type AppMode = 'course' | 'salary' | 'experience' | 'resume'; // Added 'resume' mode
+type ViewState = 'landing' | 'app' | 'about' | 'privacy' | 'terms';
 
 const App: React.FC = () => {
-  const [view, setView] = useState<'landing' | 'app'>(() => {
+  const [view, setView] = useState<ViewState>(() => {
     return new URLSearchParams(window.location.search).has('d') ? 'app' : 'landing';
   });
   
@@ -90,7 +93,7 @@ const App: React.FC = () => {
     if (encodedData) {
       try {
         const decodedData = JSON.parse(atob(encodedData));
-        setData(decodedData);
+        setData(prev => ({...prev, ...decodedData})); // Merge decoded data with initial state
         setIsPreviewMode(true);
         setView('app'); 
         setMode('course');
@@ -177,58 +180,61 @@ const App: React.FC = () => {
     } catch (error) { alert('Failed to generate PDF.'); } finally { setIsLoading(false); }
   };
 
-  const handleDownloadImage = async () => {
-    setIsEditMode(false);
-    setIsLoading(true);
-    await new Promise(r => setTimeout(r, 300));
-    try {
-      const canvas = await captureImage(certificateRef, false);
-      if (canvas) {
-        const link = document.createElement('a');
-        link.download = `Certificate_${data.studentName || 'Student'}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      }
-    } catch (e) { alert("Screenshot failed"); } finally { setIsLoading(false); }
+  const isVerifiedView = new URLSearchParams(window.location.search).has('d');
+  
+  const MODES_CONFIG = {
+    resume: { label: 'AI Resume', component: <ResumeBuilder /> },
+    course: { label: 'Certificate', component: null }, // Handled separately
+    experience: { label: 'Exp Letter', component: <ExperienceCertificate data={expData} onChange={handleExpChange} onDownload={handleDownloadExp} previewRef={expCertRef} /> },
+    salary: { label: 'Salary Slip', component: <SalarySlipGenerator data={salaryData} onChange={handleSalaryChange} /> }
   };
 
-  const isVerifiedView = new URLSearchParams(window.location.search).has('d');
-  if (view === 'landing' && !isVerifiedView) return <LandingPage onStart={(m) => { if (m) setMode(m); setView('app'); }} />;
+  // Simple Router Switch
+  if (view === 'about') return <AboutUs onBack={() => setView('landing')} />;
+  if (view === 'privacy') return <PrivacyPolicy onBack={() => setView('landing')} />;
+  if (view === 'terms') return <TermsOfService onBack={() => setView('landing')} />;
+  
+  if (view === 'landing' && !isVerifiedView) {
+    return <LandingPage 
+      onStart={(m) => { if (m) setMode(m); setView('app'); }} 
+      onNavigate={(page) => setView(page)}
+    />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col relative font-sans text-gray-900">
       {/* Universal Header */}
-      <div className="bg-blue-900 text-white p-4 flex justify-between items-center shadow-lg z-50 sticky top-0">
+      <div className="bg-blue-900 text-white p-4 flex justify-between items-center shadow-lg z-50 sticky top-0 no-print">
          <div className="flex items-center gap-4">
              <span className="font-black text-xl cursor-pointer" onClick={() => setView('landing')}>Format<span className="text-yellow-500">Hub</span></span>
              {!isPreviewMode && (
                <div className="hidden md:flex space-x-1">
-                 {['course', 'experience', 'salary'].map(m => (
-                   <button key={m} onClick={() => setMode(m as AppMode)} className={`px-4 py-2 rounded-lg text-sm font-bold transition ${mode === m ? 'bg-yellow-500 text-blue-900 shadow-md' : 'hover:bg-blue-800 text-blue-200'}`}>
-                     {m === 'course' ? 'Certificate' : m === 'salary' ? 'Salary Slip' : 'Exp Letter'}
+                 {Object.entries(MODES_CONFIG).map(([key, config]) => (
+                   <button key={key} onClick={() => setMode(key as AppMode)} className={`px-4 py-2 rounded-lg text-sm font-bold transition ${mode === key ? 'bg-yellow-500 text-blue-900 shadow-md' : 'hover:bg-blue-800 text-blue-200'}`}>
+                     {config.label}
                    </button>
                  ))}
                </div>
              )}
          </div>
-         <button onClick={() => setView('landing')} className="text-xs uppercase font-bold border border-white/30 px-3 py-1 rounded hover:bg-white hover:text-blue-900 transition">Exit Editor</button>
+         <button onClick={() => window.location.href = window.location.origin} className="text-xs uppercase font-bold border border-white/30 px-3 py-1 rounded hover:bg-white hover:text-blue-900 transition">Exit Editor</button>
       </div>
 
       {/* Mobile Mode Switcher */}
       {!isPreviewMode && (
-        <div className="md:hidden flex overflow-x-auto p-2 bg-blue-800 space-x-2 no-scrollbar shadow-inner">
-           {['course', 'experience', 'salary'].map(m => (
-             <button key={m} onClick={() => setMode(m as AppMode)} className={`whitespace-nowrap px-4 py-2 rounded-lg text-xs font-bold shadow-sm ${mode === m ? 'bg-white text-blue-900' : 'text-white/80 bg-blue-900/50'}`}>
-                {m === 'course' ? 'Certificate' : m === 'salary' ? 'Salary Slip' : 'Exp Letter'}
+        <div className="md:hidden flex overflow-x-auto p-2 bg-blue-800 space-x-2 no-scrollbar shadow-inner no-print">
+           {Object.entries(MODES_CONFIG).map(([key, config]) => (
+             <button key={key} onClick={() => setMode(key as AppMode)} className={`whitespace-nowrap px-4 py-2 rounded-lg text-xs font-bold shadow-sm ${mode === key ? 'bg-white text-blue-900' : 'text-white/80 bg-blue-900/50'}`}>
+                {config.label}
              </button>
            ))}
         </div>
       )}
 
       <div className="flex-1 overflow-x-hidden">
-        {mode === 'salary' && <SalarySlipGenerator data={salaryData} onChange={handleSalaryChange} />}
-        {mode === 'experience' && <ExperienceCertificate data={expData} onChange={handleExpChange} onDownload={handleDownloadExp} previewRef={expCertRef} />}
-        
+        {/* Render component based on mode */}
+        {MODES_CONFIG[mode]?.component}
+
         {mode === 'course' && (
           <div className="flex flex-col lg:flex-row h-full">
             {isPreviewMode && (

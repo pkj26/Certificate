@@ -1,5 +1,5 @@
 
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 
 // Helper to safely get the API key from various environment locations
 const getApiKey = () => {
@@ -41,10 +41,25 @@ export const generateAuthenticDetails = async (courseName: string) => {
 
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: `Generate a professional, authentic-looking certificate identification number and a 1-sentence verification message for a computer course named "${courseName}". 
-      Return the response in JSON format with keys: "id" (e.g., ISO-9001/CERT/2024/001), "verificationText" (e.g., This document is electronically verified by the Board of Technical Education).`,
+      // FIX: The prompt is simplified as the JSON output is now controlled by responseSchema.
+      contents: `Generate a professional, authentic-looking certificate identification number and a 1-sentence verification message for a computer course named "${courseName}".`,
       config: {
-        responseMimeType: "application/json"
+        responseMimeType: "application/json",
+        // FIX: Added responseSchema for robust JSON output.
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            id: {
+              type: Type.STRING,
+              description: 'A professional, authentic-looking certificate identification number, e.g., ISO-9001/CERT/2024/001',
+            },
+            verificationText: {
+              type: Type.STRING,
+              description: 'A 1-sentence verification message, e.g., This document is electronically verified by the Board of Technical Education.',
+            },
+          },
+          required: ['id', 'verificationText'],
+        },
       }
     });
     return JSON.parse(response.text);
