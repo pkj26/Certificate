@@ -36,38 +36,35 @@ export interface CertificateData {
   };
 }
 
+export interface ApiResponse {
+  text: string;
+}
+
+// FIX: Added missing type definitions for Salary, Experience, and Resume modules.
 export interface SalaryData {
   companyName: string;
   employeeName: string;
   designation: string;
   monthYear: string;
   employeeId: string;
-  basicSalary: number;
-  hra: number;
-  conveyance: number;
-
-  medical: number;
-  specialAllowance: number;
-  pf: number;
-  tax: number;
-  otherDeductions: number;
+  basicSalary: string;
+  hra: string;
+  conveyance: string;
+  medical: string;
+  specialAllowance: string;
+  pf: string;
+  tax: string;
+  otherDeductions: string;
 }
 
 export interface ExperienceData {
+  companyName: string;
+  gender: 'Mr.' | 'Ms.';
   employeeName: string;
   designation: string;
-  companyName: string;
   joiningDate: string;
   relievingDate: string;
-  gender: 'Mr.' | 'Ms.';
-  conduct: string;
 }
-
-export interface ApiResponse {
-  text: string;
-}
-
-// --- NEW RESUME TYPES ---
 
 export type ResumeDesign = 'modern' | 'classic' | 'creative';
 
@@ -94,6 +91,12 @@ export interface Education {
   duration: string;
 }
 
+export interface Skills {
+  languages: string[];
+  frameworks: string[];
+  tools: string[];
+}
+
 export interface Project {
   name: string;
   description: string;
@@ -111,11 +114,7 @@ export interface ResumeData {
   summary: string;
   experience: WorkExperience[];
   education: Education[];
-  skills: {
-    languages: string[];
-    frameworks: string[];
-    tools: string[];
-  };
+  skills: Skills;
   projects: Project[];
-  certifications?: Certification[];
+  certifications: Certification[];
 }

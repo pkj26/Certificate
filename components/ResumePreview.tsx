@@ -21,7 +21,10 @@ const designStyles = {
     itemSubtitle: 'text-sm font-semibold italic text-gray-700',
     itemDuration: 'text-xs font-bold text-gray-500',
     itemDescription: 'list-disc pl-5 mt-1 space-y-1 text-sm text-gray-600',
-    skillsHeader: 'font-bold'
+    skillsHeader: 'font-bold',
+    // FIX: Add empty properties to match the 'creative' style shape and avoid type errors.
+    sidebar: '',
+    main: '',
   },
   classic: {
     page: 'font-serif text-gray-900',
@@ -34,7 +37,10 @@ const designStyles = {
     itemSubtitle: 'text-base italic text-gray-700',
     itemDuration: 'text-sm font-normal text-gray-600',
     itemDescription: 'list-disc pl-6 mt-2 space-y-1.5 text-base text-gray-800',
-    skillsHeader: 'font-bold text-sm uppercase'
+    skillsHeader: 'font-bold text-sm uppercase',
+    // FIX: Add empty properties to match the 'creative' style shape and avoid type errors.
+    sidebar: '',
+    main: '',
   },
   creative: {
     page: 'font-sans text-gray-800 flex',

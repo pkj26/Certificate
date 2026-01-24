@@ -296,11 +296,12 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
                             <span>INR (₹)</span>
                           </div>
                           <div className="p-5 space-y-4">
-                            <Row label="Basic Salary" value={data.basicSalary} />
-                            <Row label="House Rent Allow. (HRA)" value={data.hra} />
-                            <Row label="Conveyance Allow." value={data.conveyance} />
-                            <Row label="Medical Allow." value={data.medical} />
-                            <Row label="Special Allow." value={data.specialAllowance} />
+                            {/* FIX: Cast string values to numbers for Row component */}
+                            <Row label="Basic Salary" value={Number(data.basicSalary)} />
+                            <Row label="House Rent Allow. (HRA)" value={Number(data.hra)} />
+                            <Row label="Conveyance Allow." value={Number(data.conveyance)} />
+                            <Row label="Medical Allow." value={Number(data.medical)} />
+                            <Row label="Special Allow." value={Number(data.specialAllowance)} />
                           </div>
                       </div>
 
@@ -310,9 +311,10 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
                             <span>INR (₹)</span>
                           </div>
                           <div className="p-5 space-y-4">
-                            <Row label="Provident Fund (PF)" value={data.pf} />
-                            <Row label="Professional Tax" value={data.tax} />
-                            <Row label="Other Deductions" value={data.otherDeductions} />
+                            {/* FIX: Cast string values to numbers for Row component */}
+                            <Row label="Provident Fund (PF)" value={Number(data.pf)} />
+                            <Row label="Professional Tax" value={Number(data.tax)} />
+                            <Row label="Other Deductions" value={Number(data.otherDeductions)} />
                           </div>
                       </div>
                     </div>
