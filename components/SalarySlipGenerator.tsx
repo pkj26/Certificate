@@ -370,14 +370,14 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
   );
 };
 
-const FieldRow = ({ label, value, mono }: { label: string, value: string, mono?: boolean }) => (
+const FieldRow: React.FC<{ label: string; value: string; mono?: boolean }> = ({ label, value, mono }) => (
   <div className="flex flex-col">
     <span className="text-[10px] uppercase font-bold text-gray-400 mb-1">{label}</span>
     <span className={`text-sm font-bold text-gray-800 ${mono ? 'font-mono' : ''}`}>{value || '-'}</span>
   </div>
 );
 
-const Row = ({ label, value }: { label: string, value: number }) => (
+const Row: React.FC<{ label: string; value: number }> = ({ label, value }) => (
   <div className="flex justify-between text-gray-600 text-xs items-center">
     <span>{label}</span>
     <span className="font-mono font-medium text-gray-900">{Number(value) > 0 ? Number(value).toLocaleString() : '-'}</span>
