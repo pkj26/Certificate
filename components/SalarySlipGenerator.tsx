@@ -57,9 +57,11 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
 
   const downloadExcel = () => {
     const XLSX = (window as any).XLSX;
-    if (!XLSX) return alert("Excel generator loading...");
+    if (!XLSX) {
+        alert("Excel library is loading, please try again in a moment.");
+        return;
+    }
     
-    // ... (Same Excel logic as before) ...
     const wb = XLSX.utils.book_new();
     const ws_data = [
       [""], 
