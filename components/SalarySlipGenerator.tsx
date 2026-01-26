@@ -39,7 +39,8 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
   }, []);
 
   const loadExampleData = () => {
-    const event = (name: string, value: any) => ({ target: { name, value } } as React.ChangeEvent<HTMLInputElement>);
+    // FIX: Ensure all values passed to the event are strings to prevent type mismatches in state.
+    const event = (name: string, value: any) => ({ target: { name, value: String(value) } } as React.ChangeEvent<HTMLInputElement>);
     onChange(event('companyName', 'TATA CONSULTANCY SERVICES'));
     onChange(event('employeeName', 'Rahul Kumar Sharma'));
     onChange(event('designation', 'Senior Software Engineer'));
@@ -99,18 +100,20 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
 
     ws['!cols'] = [{ wch: 2 }, { wch: 25 }, { wch: 15 }, { wch: 2 }, { wch: 25 }, { wch: 15 }];
 
-    ws['B2'].s = titleStyle;
-    ws['B3'].s = subTitleStyle;
-    ws['B10'].s = headerStyle; ws['C10'].s = headerStyle; ws['E10'].s = headerStyle; ws['F10'].s = headerStyle;
-    ws['B17'].s = boldStyle; ws['C17'].s = boldStyle; ws['E17'].s = boldStyle; ws['F17'].s = boldStyle;
-    ws['B19'].s = { font: { bold: true, sz: 14, color: { rgb: "1e40af" } }, fill: { fgColor: { rgb: "dbeafe" } }, border: borderStyle };
-    ws['C19'].s = { font: { bold: true, sz: 14 }, fill: { fgColor: { rgb: "dbeafe" } }, border: borderStyle };
+    if (ws['B2']) ws['B2'].s = titleStyle;
+    if (ws['B3']) ws['B3'].s = subTitleStyle;
+    ['B10','C10','E10','F10'].forEach(c => { if(ws[c]) ws[c].s = headerStyle; });
+    ['B17','C17','E17','F17'].forEach(c => { if(ws[c]) ws[c].s = boldStyle; });
+
+    if(ws['B19']) ws['B19'].s = { font: { bold: true, sz: 14, color: { rgb: "1e40af" } }, fill: { fgColor: { rgb: "dbeafe" } }, border: borderStyle };
+    if(ws['C19']) ws['C19'].s = { font: { bold: true, sz: 14 }, fill: { fgColor: { rgb: "dbeafe" } }, border: borderStyle };
 
     [11, 12, 13, 14, 15].forEach(r => {
       ['B', 'C', 'E', 'F'].forEach(c => {
-        const cell = ws[`${c}${r}`];
+        const cellRef = `${c}${r}`;
+        const cell = ws[cellRef];
         if (cell) cell.s = normalStyle;
-        else ws[`${c}${r}`] = { v: "", s: normalStyle };
+        else ws[cellRef] = { v: "", s: normalStyle };
       });
     });
 
@@ -298,7 +301,6 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
                             <span>INR (₹)</span>
                           </div>
                           <div className="p-5 space-y-4">
-                            {/* FIX: Cast string values to numbers for Row component */}
                             <Row label="Basic Salary" value={Number(data.basicSalary)} />
                             <Row label="House Rent Allow. (HRA)" value={Number(data.hra)} />
                             <Row label="Conveyance Allow." value={Number(data.conveyance)} />
@@ -313,7 +315,6 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
                             <span>INR (₹)</span>
                           </div>
                           <div className="p-5 space-y-4">
-                            {/* FIX: Cast string values to numbers for Row component */}
                             <Row label="Provident Fund (PF)" value={Number(data.pf)} />
                             <Row label="Professional Tax" value={Number(data.tax)} />
                             <Row label="Other Deductions" value={Number(data.otherDeductions)} />
