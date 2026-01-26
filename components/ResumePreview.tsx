@@ -92,6 +92,43 @@ const distributeContent = (data: ResumeData, numPages: number) => {
   return pagesContent;
 };
 
+interface SubComponentProps {
+    styles: typeof designStyles[ResumeDesign];
+    data: ResumeData;
+}
+
+const Header: React.FC<SubComponentProps> = ({ styles, data }) => (
+    <div className={styles.header}>
+        <h1 className={styles.name}>{data.personalDetails.name}</h1>
+        <p className={styles.title}>{data.personalDetails.title}</p>
+        <div className={styles.contact}>
+            <span>{data.personalDetails.email}</span>|<span>{data.personalDetails.phone}</span>|<span>{data.personalDetails.location}</span>|<span>{data.personalDetails.linkedin}</span>
+        </div>
+    </div>
+);
+
+const SidebarContent: React.FC<SubComponentProps> = ({ styles, data }) => (
+    <>
+        <div className={styles.header}>
+            <h1 className={styles.name}>{data.personalDetails.name}</h1>
+            <p className={styles.title}>{data.personalDetails.title}</p>
+        </div>
+        <h2 className={'text-base font-black uppercase tracking-widest pb-1 mb-3 border-b-2 border-yellow-400'}>Contact</h2>
+        <div className={styles.contact}>
+            <span>📧 {data.personalDetails.email}</span>
+            <span>📞 {data.personalDetails.phone}</span>
+            <span>📍 {data.personalDetails.location}</span>
+            <span>🔗 {data.personalDetails.linkedin}</span>
+        </div>
+        <h2 className={'text-base font-black uppercase tracking-widest pb-1 mb-3 border-b-2 border-yellow-400 mt-8'}>Skills</h2>
+        <div className="text-sm space-y-1">
+            <p><strong className={styles.skillsHeader}>Languages:</strong> {(Array.isArray(data.skills.languages) ? data.skills.languages : []).join(', ')}</p>
+            <p><strong className={styles.skillsHeader}>Frameworks:</strong> {(Array.isArray(data.skills.frameworks) ? data.skills.frameworks : []).join(', ')}</p>
+            <p><strong className={styles.skillsHeader}>Tools:</strong> {(Array.isArray(data.skills.tools) ? data.skills.tools : []).join(', ')}</p>
+        </div>
+    </>
+);
+
 
 const ResumePreview: React.FC<ResumePreviewProps> = ({ data, design, numPages }) => {
   const styles = designStyles[design] || designStyles.modern;
@@ -197,36 +234,5 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data, design, numPages })
 
   return <>{Array.from({ length: numPages }).map((_, i) => renderPage(i))}</>;
 };
-
-const Header = ({ styles, data }: any) => (
-    <div className={styles.header}>
-        <h1 className={styles.name}>{data.personalDetails.name}</h1>
-        <p className={styles.title}>{data.personalDetails.title}</p>
-        <div className={styles.contact}>
-            <span>{data.personalDetails.email}</span>|<span>{data.personalDetails.phone}</span>|<span>{data.personalDetails.location}</span>|<span>{data.personalDetails.linkedin}</span>
-        </div>
-    </div>
-);
-const SidebarContent = ({ styles, data }: any) => (
-    <>
-        <div className={styles.header}>
-            <h1 className={styles.name}>{data.personalDetails.name}</h1>
-            <p className={styles.title}>{data.personalDetails.title}</p>
-        </div>
-        <h2 className={'text-base font-black uppercase tracking-widest pb-1 mb-3 border-b-2 border-yellow-400'}>Contact</h2>
-        <div className={styles.contact}>
-            <span>📧 {data.personalDetails.email}</span>
-            <span>📞 {data.personalDetails.phone}</span>
-            <span>📍 {data.personalDetails.location}</span>
-            <span>🔗 {data.personalDetails.linkedin}</span>
-        </div>
-        <h2 className={'text-base font-black uppercase tracking-widest pb-1 mb-3 border-b-2 border-yellow-400 mt-8'}>Skills</h2>
-        <div className="text-sm space-y-1">
-            <p><strong className={styles.skillsHeader}>Languages:</strong> {(Array.isArray(data.skills.languages) ? data.skills.languages : []).join(', ')}</p>
-            <p><strong className={styles.skillsHeader}>Frameworks:</strong> {(Array.isArray(data.skills.frameworks) ? data.skills.frameworks : []).join(', ')}</p>
-            <p><strong className={styles.skillsHeader}>Tools:</strong> {(Array.isArray(data.skills.tools) ? data.skills.tools : []).join(', ')}</p>
-        </div>
-    </>
-);
 
 export default ResumePreview;

@@ -279,7 +279,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
   );
 };
 
-const FeatureCard = ({ icon, title, desc }: {icon: string, title: string, desc: string}) => (
+interface FeatureCardProps {
+  icon: string;
+  title: string;
+  desc: string;
+}
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, desc }) => (
   <div className="bg-white p-8 rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 hover:border-blue-200 hover:-translate-y-2 transition-all duration-300 group h-full">
     <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-3xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">{icon}</div>
     <h3 className="text-xl font-bold text-blue-900 mb-3">{title}</h3>
@@ -287,7 +292,11 @@ const FeatureCard = ({ icon, title, desc }: {icon: string, title: string, desc: 
   </div>
 );
 
-const FaqItem = ({ question, answer }: {question: string, answer: string}) => (
+interface FaqItemProps {
+  question: string;
+  answer: string;
+}
+const FaqItem: React.FC<FaqItemProps> = ({ question, answer }) => (
    <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
       <h4 className="font-bold text-blue-900 text-lg mb-2">❓ {question}</h4>
       <p className="text-gray-600 leading-relaxed">{answer}</p>
