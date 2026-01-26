@@ -129,6 +129,83 @@ const SidebarContent: React.FC<SubComponentProps> = ({ styles, data }) => (
     </>
 );
 
+// --- Refactored MainContent Component ---
+interface MainContentProps {
+    styles: typeof designStyles[ResumeDesign];
+    data: ResumeData;
+    isFirstPage: boolean;
+    experience: WorkExperience[];
+    projects: Project[];
+    certifications: Certification[];
+}
+
+const MainContent: React.FC<MainContentProps> = ({ styles, data, isFirstPage, experience, projects, certifications }) => (
+    <>
+        {isFirstPage && ( <div className="mb-6"><h2 className={styles.sectionTitle}>Professional Summary</h2><p className="text-sm leading-relaxed">{data.summary}</p></div> )}
+        
+        {experience.length > 0 && (
+            <div className="mb-6">
+                <h2 className={styles.sectionTitle}>Work Experience</h2>
+                <div className="space-y-4">
+                {experience.map((exp, i) => (
+                    <div key={i}>
+                    <div className="flex justify-between items-baseline">
+                        <h3 className={styles.itemTitle}>{exp.title}</h3>
+                        <p className={styles.itemDuration}>{exp.duration}</p>
+                    </div>
+                    <p className={styles.itemSubtitle}>{exp.company}</p>
+                    <ul className={styles.itemDescription}>
+                        {(Array.isArray(exp.description) ? exp.description : [exp.description]).map((d, j) => d && <li key={j}>{d}</li>)}
+                    </ul>
+                    </div>
+                ))}
+                </div>
+            </div>
+        )}
+        {projects.length > 0 && (
+            <div className="mb-6">
+                <h2 className={styles.sectionTitle}>Projects</h2>
+                <div className="space-y-4">
+                {projects.map((proj, i) => (
+                    <div key={i}>
+                    <h3 className={styles.itemTitle}>{proj.name}</h3>
+                    <p className="text-sm text-gray-600">{proj.description}</p>
+                    <p className="text-xs font-mono mt-1 text-blue-700"><strong>Tech Stack:</strong> {proj.techStack}</p>
+                    </div>
+                ))}
+                </div>
+            </div>
+        )}
+        {certifications.length > 0 && (
+             <div className="mb-6">
+                <h2 className={styles.sectionTitle}>Certifications</h2>
+                <div className="space-y-3">
+                    {certifications.map((cert, i) => (
+                        <div key={i}>
+                            <h3 className={styles.itemTitle}>{cert.name}</h3>
+                            <p className={styles.itemSubtitle}>{cert.issuer} - <span className="font-normal">{cert.date}</span></p>
+                        </div>
+                    ))}
+                </div>
+             </div>
+        )}
+        {isFirstPage && data.education.length > 0 && (
+            <div className="mb-6">
+                <h2 className={styles.sectionTitle}>Education</h2>
+                {data.education.map((edu, i) => (
+                <div key={i} className="flex justify-between items-baseline">
+                    <div>
+                    <h3 className={styles.itemTitle}>{edu.degree}</h3>
+                    <p className={styles.itemSubtitle}>{edu.institution}</p>
+                    </div>
+                    <p className={styles.itemDuration}>{edu.duration}</p>
+                </div>
+                ))}
+            </div>
+        )}
+    </>
+);
+
 
 const ResumePreview: React.FC<ResumePreviewProps> = ({ data, design, numPages }) => {
   const styles = designStyles[design] || designStyles.modern;
@@ -138,79 +215,21 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data, design, numPages })
     const { experience, projects, certifications } = pagedContent[pageIndex];
     const isFirstPage = pageIndex === 0;
 
-    const MainContent = () => (
-        <>
-            {isFirstPage && ( <div className="mb-6"><h2 className={styles.sectionTitle}>Professional Summary</h2><p className="text-sm leading-relaxed">{data.summary}</p></div> )}
-            
-            {experience.length > 0 && (
-                <div className="mb-6">
-                    <h2 className={styles.sectionTitle}>Work Experience</h2>
-                    <div className="space-y-4">
-                    {experience.map((exp, i) => (
-                        <div key={i}>
-                        <div className="flex justify-between items-baseline">
-                            <h3 className={styles.itemTitle}>{exp.title}</h3>
-                            <p className={styles.itemDuration}>{exp.duration}</p>
-                        </div>
-                        <p className={styles.itemSubtitle}>{exp.company}</p>
-                        <ul className={styles.itemDescription}>
-                            {(Array.isArray(exp.description) ? exp.description : [exp.description]).map((d, j) => d && <li key={j}>{d}</li>)}
-                        </ul>
-                        </div>
-                    ))}
-                    </div>
-                </div>
-            )}
-            {projects.length > 0 && (
-                <div className="mb-6">
-                    <h2 className={styles.sectionTitle}>Projects</h2>
-                    <div className="space-y-4">
-                    {projects.map((proj, i) => (
-                        <div key={i}>
-                        <h3 className={styles.itemTitle}>{proj.name}</h3>
-                        <p className="text-sm text-gray-600">{proj.description}</p>
-                        <p className="text-xs font-mono mt-1 text-blue-700"><strong>Tech Stack:</strong> {proj.techStack}</p>
-                        </div>
-                    ))}
-                    </div>
-                </div>
-            )}
-            {certifications.length > 0 && (
-                 <div className="mb-6">
-                    <h2 className={styles.sectionTitle}>Certifications</h2>
-                    <div className="space-y-3">
-                        {certifications.map((cert, i) => (
-                            <div key={i}>
-                                <h3 className={styles.itemTitle}>{cert.name}</h3>
-                                <p className={styles.itemSubtitle}>{cert.issuer} - <span className="font-normal">{cert.date}</span></p>
-                            </div>
-                        ))}
-                    </div>
-                 </div>
-            )}
-            {isFirstPage && data.education.length > 0 && (
-                <div className="mb-6">
-                    <h2 className={styles.sectionTitle}>Education</h2>
-                    {data.education.map((edu, i) => (
-                    <div key={i} className="flex justify-between items-baseline">
-                        <div>
-                        <h3 className={styles.itemTitle}>{edu.degree}</h3>
-                        <p className={styles.itemSubtitle}>{edu.institution}</p>
-                        </div>
-                        <p className={styles.itemDuration}>{edu.duration}</p>
-                    </div>
-                    ))}
-                </div>
-            )}
-        </>
-    );
-
     return (
       <div key={pageIndex} className={`resume-page-preview w-[794px] h-[1123px] bg-white shadow-2xl ${styles.page}`}>
         {design === 'creative' ? (
             <>
                 <div className={styles.sidebar}> {isFirstPage && <SidebarContent styles={styles} data={data} />} </div>
-                <div className={styles.main}> <MainContent /> </div>
+                <div className={styles.main}>
+                    <MainContent 
+                        styles={styles} 
+                        data={data} 
+                        isFirstPage={isFirstPage}
+                        experience={experience}
+                        projects={projects}
+                        certifications={certifications}
+                    />
+                </div>
             </>
         ) : (
             <div className="p-10">
@@ -225,7 +244,14 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data, design, numPages })
                         </div>
                     </div>
                 )}
-                <MainContent/>
+                <MainContent 
+                    styles={styles} 
+                    data={data} 
+                    isFirstPage={isFirstPage}
+                    experience={experience}
+                    projects={projects}
+                    certifications={certifications}
+                />
             </div>
         )}
       </div>
