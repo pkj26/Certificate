@@ -14,6 +14,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
   const tools = [
     { key: '/resume-builder', name: 'AI Resume Builder' },
     { key: '/image-resizer', name: 'Govt Photo Resizer' },
+    { key: '/poster-maker', name: 'Online Poster Maker' },
+    { key: '/jpg-to-pdf', name: 'JPG to PDF Converter' },
     { key: '/certificate-generator', name: 'Certificate Maker' },
     { key: '/experience-letter-generator', name: 'Experience Letter' },
     { key: '/salary-slip-generator', name: 'Salary Slip Generator' },
@@ -78,17 +80,17 @@ const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
             India's #1 Document Resource
           </span>
           <h1 className="text-5xl lg:text-7xl font-black text-blue-900 mb-8 tracking-tight leading-tight">
-            India's Document Hub: Free AI Resume Builder & Govt Exam Tools
+            India's Document Hub: Free Resume, PDF Tools & Exam Formats
           </h1>
           <p className="text-lg lg:text-2xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
-            Create job-winning resumes, resize photos for SSC/UPSC exams (20kb-50kb), and download salary slips. Bilkul free!
+            Convert Photos to PDF, Resize Exam Images (50kb), and build job-winning resumes. All tools are 100% Free & Mobile Friendly.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <button onClick={() => navigate('/resume-builder')} className="w-full sm:w-auto text-lg bg-blue-600 text-white px-10 py-5 rounded-full font-bold shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:bg-blue-700 hover:-translate-y-1 transition-all">
-              Build Your Resume Now
+            <button onClick={() => navigate('/poster-maker')} className="w-full sm:w-auto text-lg bg-pink-600 text-white px-10 py-5 rounded-full font-bold shadow-xl shadow-pink-600/30 hover:shadow-2xl hover:bg-pink-700 hover:-translate-y-1 transition-all">
+              Create Free Poster
             </button>
             <button onClick={() => navigate('/image-resizer')} className="w-full sm:w-auto text-lg bg-white text-blue-900 border-2 border-gray-100 px-10 py-5 rounded-full font-bold hover:border-blue-200 hover:bg-gray-50 transition-all">
-              Resize Exam Photo (50kb)
+              Resize Exam Photo
             </button>
           </div>
           
@@ -101,46 +103,34 @@ const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
       <section id="tools-explained" className="px-6 lg:px-12 py-24 bg-gray-50 border-y border-gray-200">
          <div className="max-w-4xl mx-auto prose prose-blue prose-lg">
             <p className="lead text-xl text-gray-700 text-center mb-16">
-                Welcome to FormatHub, India's most comprehensive free resource for creating critical professional and academic documents. We understand that the right format can make all the difference. Our powerful online tools are designed with Indian standards in mind.
+                Welcome to FormatHub, India's most comprehensive free resource. We have updated our platform with powerful design tools to help small businesses and students.
             </p>
 
-            <h2 className="text-3xl font-black text-blue-900 mb-8">New! Govt Exam Photo Resizer (20KB - 50KB)</h2>
+            <h2 className="text-3xl font-black text-blue-900 mb-8">New! Free Online Poster Maker 2026</h2>
+            <p className="text-gray-600 mb-6">
+                Need a poster for your shop's Diwali Sale or a "Hiring Now" post for Instagram? Our <strong>Online Poster Maker</strong> lets you design professional graphics in minutes.
+            </p>
+            <p className="text-gray-600 mb-6">
+                With pre-made templates for Festivals, Sales, and Events, you can drag and drop text, add your own photos/logos, and download high-quality images for free.
+            </p>
+            <div className="text-center my-8">
+                <button onClick={() => navigate('/poster-maker')} className="bg-pink-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-pink-700 transition">Design a Poster Now &rarr;</button>
+            </div>
+
+            <h2 className="text-3xl font-black text-blue-900 mb-8">New! JPG to PDF Converter (Photo to PDF)</h2>
+            <p className="text-gray-600 mb-6">
+                Need to submit assignments for IGNOU, CBSE, or upload documents for job applications? Our <strong>Image to PDF Converter</strong> lets you select multiple photos from your gallery and combine them into a single, high-quality PDF file.
+            </p>
+            <div className="text-center my-8">
+                <button onClick={() => navigate('/jpg-to-pdf')} className="bg-green-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-green-700 transition">Combine Photos to PDF &rarr;</button>
+            </div>
+
+            <h2 className="text-3xl font-black text-blue-900 mb-8">Govt Exam Photo Resizer (20KB - 50KB)</h2>
             <p className="text-gray-600 mb-6">
                 Applying for SSC CGL, UPSC, IBPS, or NEET? You know the struggle: "Image should be between 20kb to 50kb" and "Dimensions 3.5cm x 4.5cm".
             </p>
-            <p className="text-gray-600 mb-6">
-                Our new <strong>Image Resizer Tool</strong> comes with built-in presets for all major exams. Just upload your photo, select "SSC Photo" or "UPSC Signature", and instantly download the compressed image in the exact required format. No technical skills needed!
-            </p>
             <div className="text-center my-8">
                 <button onClick={() => navigate('/image-resizer')} className="bg-purple-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-purple-700 transition">Resize Image Now &rarr;</button>
-            </div>
-
-            <h2 className="text-3xl font-black text-blue-900 mb-8">Get Hired Faster: Professional Resume Formats 2026 (ATS-Friendly)</h2>
-            <p className="text-gray-600 mb-6">
-                Did you know that over 90% of large companies in India now use an Applicant Tracking System (ATS) to screen resumes? If your resume isn't formatted correctly, it might get rejected by the software before a human ever sees it.
-            </p>
-            <p className="text-gray-600 mb-6">
-                Our <strong>AI Resume Builder</strong> provides AI-powered, content-rich drafts tailored to specific Indian job roles. Whether you're a B.Tech fresher or a seasoned sales manager, our tool ensures your resume is packed with the right keywords.
-            </p>
-            
-            <div className="text-center my-8">
-                <button onClick={() => navigate('/resume-builder')} className="bg-blue-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition">Build My Resume Now &rarr;</button>
-            </div>
-
-            <h2 className="text-3xl font-black text-blue-900 mb-8">Clear & Compliant: The Ultimate Salary Slip Format India</h2>
-            <p className="text-gray-600 mb-6">
-                A salary slip is not just a piece of paper; it's a vital financial document required for everything from applying for a loan to filing your income tax returns (ITR). A professionally generated salary slip with the correct <strong>Salary Slip Format India</strong> is essential.
-            </p>
-            <div className="text-center my-8">
-                <button onClick={() => navigate('/salary-slip-generator')} className="bg-green-700 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-green-800 transition">Create Salary Slip &rarr;</button>
-            </div>
-
-            <h2 className="text-3xl font-black text-blue-900 mb-8">Build Credibility: Professional Online Certificate Maker</h2>
-            <p className="text-gray-600 mb-6">
-                For training centers, computer institutes, and educational organizations, a certificate is a symbol of a student's achievement. Our <strong>Online Certificate Maker</strong> empowers you to create stunning, official-looking certificates for courses like DCA, ADCA, or any other program.
-            </p>
-             <div className="text-center my-8">
-                <button onClick={() => navigate('/certificate-generator')} className="bg-purple-700 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-purple-800 transition">Create a Certificate Now &rarr;</button>
             </div>
          </div>
       </section>
@@ -149,11 +139,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
          <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-black text-blue-900 mb-12 text-center">Your Questions, Answered</h2>
             <div className="space-y-6">
+               <FaqItem question="How to make a poster online for free?" answer="Use FormatHub's Poster Maker. Select a template, customize the text, add your photo, and download. It's completely free and works in your browser." />
+               <FaqItem question="How to convert photo to PDF for assignment?" answer="Use our free 'JPG to PDF' tool. Select your photos, arrange them in order using the up/down arrows, and click 'Download PDF'. It's perfect for handwritten notes." />
                <FaqItem question="How to resize photo for SSC CGL 2026?" answer="Use our 'Govt Photo Resizer' tool. Select 'SSC (CGL/CHSL) Photo' from the dropdown. It will automatically set the dimensions to 3.5cm x 4.5cm and compress the file size to between 20kb and 50kb." />
-               <FaqItem question="What is the best resume format for freshers?" answer="For freshers, the best format is a clean, single-page resume that is ATS-friendly. Our AI Resume Builder's 'Fresher' templates are specifically designed for this." />
-               <FaqItem question="Is a 2-page resume acceptable in India?" answer="Yes, a 2-page resume is perfectly acceptable for professionals with 5+ years of relevant experience." />
-               <FaqItem question="Is FormatHub.in really free to use?" answer="Yes, 100%! All our tools—the AI Resume Builder, Salary Slip Generator, Image Resizer, and Certificate Maker—are completely free to use." />
-               <FaqItem question="Is my data safe on FormatHub?" answer="Absolutely. We take your privacy very seriously. FormatHub does not store any of the personal information or photos you upload. All processing happens locally in your browser." />
+               <FaqItem question="Is FormatHub.in really free to use?" answer="Yes, 100%! All our tools—the AI Resume Builder, Salary Slip Generator, Image Resizer, Poster Maker, and PDF Converter—are completely free to use." />
             </div>
          </div>
       </section>
@@ -174,10 +163,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
             <div>
                <h4 className="font-black text-white uppercase tracking-widest mb-6">Tools</h4>
                <ul className="space-y-3 text-blue-300 text-sm">
+                 <li><button onClick={() => navigate('/poster-maker')} className="hover:text-white transition text-left">Poster Maker</button></li>
+                 <li><button onClick={() => navigate('/jpg-to-pdf')} className="hover:text-white transition text-left">JPG to PDF Converter</button></li>
                  <li><button onClick={() => navigate('/resume-builder')} className="hover:text-white transition text-left">AI Resume Builder</button></li>
                  <li><button onClick={() => navigate('/image-resizer')} className="hover:text-white transition text-left">Photo Resizer (50kb)</button></li>
                  <li><button onClick={() => navigate('/certificate-generator')} className="hover:text-white transition text-left">Certificate Generator</button></li>
-                 <li><button onClick={() => navigate('/experience-letter-generator')} className="hover:text-white transition text-left">Experience Letters</button></li>
                  <li><button onClick={() => navigate('/salary-slip-generator')} className="hover:text-white transition text-left">Salary Slips</button></li>
                </ul>
             </div>

@@ -6,6 +6,8 @@ import SalarySlipGenerator from './components/SalarySlipGenerator';
 import ExperienceCertificate from './components/ExperienceCertificate';
 import ResumeBuilder from './components/ResumeBuilder';
 import ImageResizer from './components/ImageResizer';
+import ImageToPdf from './components/ImageToPdf';
+import PosterMaker from './components/PosterMaker';
 import { AboutUs, PrivacyPolicy, TermsOfService } from './components/InfoPages';
 import SEO from './components/SEO';
 import { SalaryData, ExperienceData } from './types';
@@ -129,6 +131,22 @@ const App: React.FC = () => {
              <SEO title="Govt Exam Photo Resizer (20kb - 50kb) | SSC, UPSC, IBPS" description="Resize and compress photos and signatures for SSC, UPSC, IBPS, NEET online forms. Convert image to 20kb, 50kb in cm/mm dimensions instantly." />
              {renderHeader('Image Resizer Tool')}
              <ImageResizer />
+          </div>
+        );
+      case '/jpg-to-pdf':
+        return (
+          <div className="min-h-screen bg-gray-50">
+             <SEO title="JPG to PDF Converter | Combine Photos to PDF Free" description="Convert multiple images (JPG/PNG) to a single PDF document online. Best for IGNOU assignments, SSC/UPSC documents, and ID proofs. Fast & Secure." />
+             {renderHeader('JPG to PDF Converter')}
+             <ImageToPdf />
+          </div>
+        );
+      case '/poster-maker':
+        return (
+          <div className="min-h-screen bg-gray-50">
+             <SEO title="Free Online Poster Maker 2026 | Create Ads & Invites" description="Design professional business posters, festival greetings (Diwali/Eid), and event invitations online. Drag and drop, add photos, and download PNG." />
+             {renderHeader('Poster Maker Tool')}
+             <PosterMaker />
           </div>
         );
       case '/about':
