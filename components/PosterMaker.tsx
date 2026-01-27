@@ -356,6 +356,53 @@ const PosterMaker: React.FC = () => {
                 <li><strong>Cost-Effective:</strong> Traditional printing is expensive. Digital posters are free to create and share.</li>
             </ul>
 
+            {/* NEW BLOG SECTION */}
+            <h2 className="text-3xl font-black text-gray-900 mt-12 mb-6">10 Best Graphic Design Tips for 2026</h2>
+            <p className="mb-6">As digital marketing evolves, so do design trends. To ensure your posters stand out on Instagram, LinkedIn, and Facebook, follow these expert tips for 2026:</p>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-bold text-pink-700 text-lg mb-2">1. Embrace Minimalism</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">Clutter kills conversion. In 2026, keep it simple. Use ample whitespace and let your main message breathe. If you are announcing a sale, "50% OFF" should be the focus, not the background pattern.</p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-bold text-pink-700 text-lg mb-2">2. Bold & Massive Typography</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">Big fonts are in. Don't be afraid to let your text overlap images or take up 50% of the canvas. Use the 'Font Size' slider in our tool to maximize impact.</p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-bold text-pink-700 text-lg mb-2">3. High Contrast Colors</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">Ensure your text is readable. If your background is dark (like our 'Motivational' template), use bright yellow or white text. Accessibility is key for social media feeds.</p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-bold text-pink-700 text-lg mb-2">4. Authentic Imagery</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">Generic stock photos are out. Use our 'Upload Image' feature to add real photos of your products, team, or events. Authenticity builds trust.</p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-bold text-pink-700 text-lg mb-2">5. Visual Hierarchy</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">Guide the viewer's eye. The most important information (e.g., "Mega Sale") should be the biggest. Details like "Terms Apply" should be the smallest.</p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-bold text-pink-700 text-lg mb-2">6. Mobile-First Design</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">80% of users view content on mobile. Our default canvas size is optimized for vertical viewing (Instagram Stories/Reels style) to ensure maximum visibility.</p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-bold text-pink-700 text-lg mb-2">7. Consistent Branding</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">Use the same color palette and font style across all your posters. This helps customers recognize your brand instantly on their busy feeds.</p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-bold text-pink-700 text-lg mb-2">8. Use of 3D Elements</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">Flat design is evolving. Add depth by using shadows or our library of 3D-style stickers (like the fire emoji or gift box) to make your offer pop.</p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-bold text-pink-700 text-lg mb-2">9. Clear Call to Action (CTA)</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">Don't leave users guessing. Tell them what to do. Add text like "Call Now", "Visit Website", or "Shop Today" in a contrasting color.</p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-bold text-pink-700 text-lg mb-2">10. Emotional Storytelling</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">Connect emotionally. Instead of just "Gym Open", try "Transform Your Life Today". Use visuals that evoke happiness, success, or urgency.</p>
+                </div>
+            </div>
+
             <h3 className="text-2xl font-bold text-gray-800 mb-4">How to Design a Poster in 2 Minutes</h3>
             <ol className="list-decimal pl-6 mb-6 text-gray-700 space-y-2">
                 <li><strong>Select a Template:</strong> Don't start from scratch. Use our pre-made layouts for "Big Sale", "Hiring", or "Festivals".</li>
