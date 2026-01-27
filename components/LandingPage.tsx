@@ -1,4 +1,3 @@
-
 // FIX: Corrected the import statement for React hooks. The hooks should not be wrapped in quotes.
 import React, { useState, useEffect, useRef } from 'react';
 import AdUnit from './AdUnit';
@@ -133,6 +132,39 @@ const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
                 <button onClick={() => navigate('/image-resizer')} className="bg-purple-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-purple-700 transition">Resize Image Now &rarr;</button>
             </div>
          </div>
+      </section>
+
+      {/* NEW SECTION: Popular Searches for SEO Ranking */}
+      <section className="px-6 lg:px-12 py-16 bg-blue-50">
+        <div className="max-w-6xl mx-auto">
+            <h3 className="text-2xl font-black text-blue-900 mb-8 text-center">Popular Searches on FormatHub</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                <div onClick={() => navigate('/image-resizer')} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md cursor-pointer transition">
+                    <h4 className="font-bold text-blue-700">Resize Photo for SSC CGL 2026</h4>
+                    <p className="text-gray-600 mt-1">Compress image to 20kb-50kb with 3.5x4.5cm dimensions.</p>
+                </div>
+                <div onClick={() => navigate('/image-resizer')} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md cursor-pointer transition">
+                    <h4 className="font-bold text-blue-700">UPSC Photo & Signature Resizer</h4>
+                    <p className="text-gray-600 mt-1">Make photo 350x350px under 300kb instantly.</p>
+                </div>
+                <div onClick={() => navigate('/jpg-to-pdf')} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md cursor-pointer transition">
+                    <h4 className="font-bold text-blue-700">Convert Handwritten Notes to PDF</h4>
+                    <p className="text-gray-600 mt-1">Best for IGNOU, CBSE & College Assignments.</p>
+                </div>
+                <div onClick={() => navigate('/poster-maker')} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md cursor-pointer transition">
+                    <h4 className="font-bold text-blue-700">Online Festival Poster Maker</h4>
+                    <p className="text-gray-600 mt-1">Create Diwali, Eid & Independence Day posters with your photo.</p>
+                </div>
+                <div onClick={() => navigate('/resume-builder')} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md cursor-pointer transition">
+                    <h4 className="font-bold text-blue-700">Resume Format for Freshers PDF</h4>
+                    <p className="text-gray-600 mt-1">Download simple, professional CV format for first job.</p>
+                </div>
+                <div onClick={() => navigate('/certificate-generator')} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md cursor-pointer transition">
+                    <h4 className="font-bold text-blue-700">Computer Course Certificate Maker</h4>
+                    <p className="text-gray-600 mt-1">Generate DCA/ADCA certificate with student photo for free.</p>
+                </div>
+            </div>
+        </div>
       </section>
 
       <section id="faq" className="px-6 lg:px-12 py-24 bg-white">
