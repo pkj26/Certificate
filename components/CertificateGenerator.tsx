@@ -42,6 +42,10 @@ interface CertificateGeneratorProps {
 }
 
 const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onBack }) => {
+  useEffect(() => {
+    console.log("Component Loaded: CertificateGenerator.tsx");
+  }, []);
+
   const [data, setData] = useState<CertificateData>(INITIAL_DATA);
   const [certInfo, setCertInfo] = useState({ id: 'ISO-9001/GEN-100', verificationText: 'Verifying with Digital Signature...' });
   const [isEditMode, setIsEditMode] = useState(false);

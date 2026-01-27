@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { SalaryData } from '../types';
 import AdUnit from './AdUnit';
@@ -23,6 +24,10 @@ const Row: React.FC<{ label: string; value: number }> = ({ label, value }) => (
 );
 
 const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
+  useEffect(() => {
+    console.log("Component Loaded: SalarySlipGenerator.tsx");
+  }, []);
+
   const [totals, setTotals] = useState({ earnings: 0, deductions: 0, net: 0 });
   const slipRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);

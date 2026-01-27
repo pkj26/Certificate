@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { ResumeData, ResumeDesign, WorkExperience, Project, Certification } from '../types';
 import { resumeTemplates } from '../services/resumeTemplates';
@@ -147,6 +148,10 @@ const EditorPanel: React.FC<{ data: ResumeData, onDataChange: (section: keyof Re
 
 
 const ResumeBuilder: React.FC = () => {
+  useEffect(() => {
+    console.log("Component Loaded: ResumeBuilder.tsx");
+  }, []);
+
   const [data, setData] = useState<ResumeData>(INITIAL_RESUME_DATA);
   const [category, setCategory] = useState(initialCategory);
   const [role, setRole] = useState(initialRole);
