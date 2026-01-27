@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { SalaryData } from '../types';
 import AdUnit from './AdUnit';
@@ -7,6 +6,21 @@ interface SalarySlipProps {
   data: SalaryData;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+// Helper components defined BEFORE they are used in the main component.
+const FieldRow: React.FC<{ label: string; value: string; mono?: boolean }> = ({ label, value, mono }) => (
+  <div className="flex flex-col">
+    <span className="text-[10px] uppercase font-bold text-gray-400 mb-1">{label}</span>
+    <span className={`text-sm font-bold text-gray-800 ${mono ? 'font-mono' : ''}`}>{value || '-'}</span>
+  </div>
+);
+
+const Row: React.FC<{ label: string; value: number }> = ({ label, value }) => (
+  <div className="flex justify-between text-gray-600 text-xs items-center">
+    <span>{label}</span>
+    <span className="font-mono font-medium text-gray-900">{Number(value) > 0 ? Number(value).toLocaleString() : '-'}</span>
+  </div>
+);
 
 const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
   const [totals, setTotals] = useState({ earnings: 0, deductions: 0, net: 0 });
@@ -369,19 +383,5 @@ const SalarySlipGenerator: React.FC<SalarySlipProps> = ({ data, onChange }) => {
     </div>
   );
 };
-
-const FieldRow: React.FC<{ label: string; value: string; mono?: boolean }> = ({ label, value, mono }) => (
-  <div className="flex flex-col">
-    <span className="text-[10px] uppercase font-bold text-gray-400 mb-1">{label}</span>
-    <span className={`text-sm font-bold text-gray-800 ${mono ? 'font-mono' : ''}`}>{value || '-'}</span>
-  </div>
-);
-
-const Row: React.FC<{ label: string; value: number }> = ({ label, value }) => (
-  <div className="flex justify-between text-gray-600 text-xs items-center">
-    <span>{label}</span>
-    <span className="font-mono font-medium text-gray-900">{Number(value) > 0 ? Number(value).toLocaleString() : '-'}</span>
-  </div>
-);
 
 export default SalarySlipGenerator;

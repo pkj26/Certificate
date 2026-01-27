@@ -20,17 +20,22 @@ const INITIAL_EXPERIENCE_DATA: ExperienceData = {
 };
 
 const App: React.FC = () => {
-  const [route, setRoute] = useState(window.location.pathname);
+  // Use hash-based routing
+  const getRouteFromHash = () => {
+    const hash = window.location.hash.substring(1); // remove '#'
+    return hash.split('?')[0] || '/';
+  };
+
+  const [route, setRoute] = useState(getRouteFromHash());
 
   useEffect(() => {
-    const handlePopState = () => setRoute(window.location.pathname);
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    const handleHashChange = () => setRoute(getRouteFromHash());
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   const navigate = (path: string) => {
-    window.history.pushState({}, '', path);
-    setRoute(path);
+    window.location.hash = path;
     window.scrollTo(0, 0); // Scroll to top on page change
   };
 

@@ -151,15 +151,18 @@ const THEME_STYLES: Record<ThemeType, any> = {
 const Certificate: React.FC<CertificateProps> = ({ data, certInfo, certificateRef, isEditMode, onPositionChange }) => {
   const [dragging, setDragging] = useState<{ key: keyof CertificateData['positions']; startX: number; startY: number; initialPos: ElementPosition } | null>(null);
 
-  // Check if we are viewing a verified link
   const isVerifiedView = useMemo(() => {
-    return new URLSearchParams(window.location.search).has('d');
+    const hash = window.location.hash;
+    const queryStringIndex = hash.indexOf('?');
+    if (queryStringIndex > -1) {
+        return new URLSearchParams(hash.substring(queryStringIndex)).has('d');
+    }
+    return false;
   }, []);
 
   const theme = THEME_STYLES[data.theme] || THEME_STYLES['classic'];
   const isDark = theme.isDark;
 
-  // Generate verification URL for QR code
   const verificationUrl = useMemo(() => {
     try {
       const essentialData = {
@@ -172,11 +175,12 @@ const Certificate: React.FC<CertificateProps> = ({ data, certInfo, certificateRe
         issueDate: data.issueDate,
         institutionName: data.institutionName,
         theme: data.theme,
-        teacherName: data.teacherName, // Added teacher info to verification data
+        teacherName: data.teacherName,
         photoUrl: data.photoUrl 
       };
       const encoded = btoa(JSON.stringify(essentialData));
-      return `${window.location.origin}${window.location.pathname}?d=${encoded}`;
+      const baseUrl = window.location.href.split('#')[0];
+      return `${baseUrl}#/certificate-generator?d=${encoded}`;
     } catch (e) {
       return window.location.href;
     }

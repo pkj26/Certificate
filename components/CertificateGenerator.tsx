@@ -48,8 +48,16 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onBack }) =
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Check for verification data in URL
-    const params = new URLSearchParams(window.location.search);
+    const getSearchParamsFromHash = () => {
+        const hash = window.location.hash;
+        const queryStringIndex = hash.indexOf('?');
+        if (queryStringIndex > -1) {
+            return new URLSearchParams(hash.substring(queryStringIndex));
+        }
+        return new URLSearchParams('');
+    };
+
+    const params = getSearchParamsFromHash();
     const verificationData = params.get('d');
     if (verificationData) {
       try {
