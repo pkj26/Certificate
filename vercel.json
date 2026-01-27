@@ -1,4 +1,5 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/(BingSiteAuth\\.xml|robots\\.txt|sitemap\\.xml|ads\\.txt)",
