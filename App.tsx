@@ -5,6 +5,7 @@ import CertificateGenerator from './components/CertificateGenerator';
 import SalarySlipGenerator from './components/SalarySlipGenerator';
 import ExperienceCertificate from './components/ExperienceCertificate';
 import ResumeBuilder from './components/ResumeBuilder';
+import ImageResizer from './components/ImageResizer';
 import { AboutUs, PrivacyPolicy, TermsOfService } from './components/InfoPages';
 import SEO from './components/SEO';
 import { SalaryData, ExperienceData } from './types';
@@ -120,6 +121,14 @@ const App: React.FC = () => {
             <SEO title="AI Resume Builder | 100+ Free ATS Templates (1-5 Pages)" description="India's best AI resume builder. Get pre-filled, ATS-friendly templates for any job role. Create and download a 1, 2, or 5-page professional resume in minutes." />
             {renderHeader('AI Resume Builder')}
             <ResumeBuilder />
+          </div>
+        );
+      case '/image-resizer':
+        return (
+          <div className="min-h-screen bg-gray-50">
+             <SEO title="Govt Exam Photo Resizer (20kb - 50kb) | SSC, UPSC, IBPS" description="Resize and compress photos and signatures for SSC, UPSC, IBPS, NEET online forms. Convert image to 20kb, 50kb in cm/mm dimensions instantly." />
+             {renderHeader('Image Resizer Tool')}
+             <ImageResizer />
           </div>
         );
       case '/about':
