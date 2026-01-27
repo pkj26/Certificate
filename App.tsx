@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import LandingPage from './components/LandingPage';
 import CertificateGenerator from './components/CertificateGenerator';
@@ -20,22 +21,22 @@ const INITIAL_EXPERIENCE_DATA: ExperienceData = {
 };
 
 const App: React.FC = () => {
-  // Use hash-based routing
-  const getRouteFromHash = () => {
-    const hash = window.location.hash.substring(1); // remove '#'
-    return hash.split('?')[0] || '/';
-  };
+  // Use path-based routing for clean URLs
+  const getRouteFromPath = () => window.location.pathname;
 
-  const [route, setRoute] = useState(getRouteFromHash());
+  const [route, setRoute] = useState(getRouteFromPath());
 
   useEffect(() => {
-    const handleHashChange = () => setRoute(getRouteFromHash());
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    const handlePopState = () => setRoute(getRouteFromPath());
+    // 'popstate' event fires when using the browser's back/forward buttons
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   const navigate = (path: string) => {
-    window.location.hash = path;
+    // Use the History API to change the URL without a page reload
+    window.history.pushState({}, '', path);
+    setRoute(path); // Update state to trigger a re-render
     window.scrollTo(0, 0); // Scroll to top on page change
   };
 

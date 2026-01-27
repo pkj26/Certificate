@@ -152,12 +152,7 @@ const Certificate: React.FC<CertificateProps> = ({ data, certInfo, certificateRe
   const [dragging, setDragging] = useState<{ key: keyof CertificateData['positions']; startX: number; startY: number; initialPos: ElementPosition } | null>(null);
 
   const isVerifiedView = useMemo(() => {
-    const hash = window.location.hash;
-    const queryStringIndex = hash.indexOf('?');
-    if (queryStringIndex > -1) {
-        return new URLSearchParams(hash.substring(queryStringIndex)).has('d');
-    }
-    return false;
+    return new URLSearchParams(window.location.search).has('d');
   }, []);
 
   const theme = THEME_STYLES[data.theme] || THEME_STYLES['classic'];
@@ -179,8 +174,9 @@ const Certificate: React.FC<CertificateProps> = ({ data, certInfo, certificateRe
         photoUrl: data.photoUrl 
       };
       const encoded = btoa(JSON.stringify(essentialData));
-      const baseUrl = window.location.href.split('#')[0];
-      return `${baseUrl}#/certificate-generator?d=${encoded}`;
+      // Use origin and path for a clean URL
+      const baseUrl = `${window.location.origin}/certificate-generator`;
+      return `${baseUrl}?d=${encoded}`;
     } catch (e) {
       return window.location.href;
     }

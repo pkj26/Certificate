@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { CertificateData, ElementPosition, ThemeType } from '../types';
 import Certificate from './Certificate';
@@ -48,16 +49,8 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onBack }) =
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const getSearchParamsFromHash = () => {
-        const hash = window.location.hash;
-        const queryStringIndex = hash.indexOf('?');
-        if (queryStringIndex > -1) {
-            return new URLSearchParams(hash.substring(queryStringIndex));
-        }
-        return new URLSearchParams('');
-    };
-
-    const params = getSearchParamsFromHash();
+    // Parse verification data from URL search params (e.g., ?d=...)
+    const params = new URLSearchParams(window.location.search);
     const verificationData = params.get('d');
     if (verificationData) {
       try {
