@@ -1,6 +1,13 @@
 
 {
   "rewrites": [
+    { "source": "/resume-builder", "destination": "/index.html" },
+    { "source": "/certificate-generator", "destination": "/index.html" },
+    { "source": "/salary-slip-generator", "destination": "/index.html" },
+    { "source": "/experience-letter-generator", "destination": "/index.html" },
+    { "source": "/about", "destination": "/index.html" },
+    { "source": "/privacy", "destination": "/index.html" },
+    { "source": "/terms", "destination": "/index.html" },
     {
       "source": "/((?!api/|ads.txt|robots.txt|sitemap.xml|_next/|favicon.ico|sw.js|.*\\..*).*)",
       "destination": "/index.html"
