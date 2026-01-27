@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import AdUnit from './AdUnit';
 
@@ -164,48 +165,39 @@ const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
             <AdUnit slotId="mid-content-1" />
          </div>
       </section>
-
-      <section className="px-6 lg:px-12 py-20 bg-white">
-        <div className="max-w-6xl mx-auto">
-             <div className="text-center mb-16">
-                <span className="text-blue-600 font-black tracking-widest uppercase text-xs">Simple Process</span>
-                <h2 className="text-3xl font-black text-blue-900 mt-2">How It Works</h2>
-             </div>
-             <div className="grid md:grid-cols-4 gap-4">
-                {[
-                    { step: "01", title: "Select Template", desc: "Choose your job role from 100+ options." },
-                    { step: "02", title: "Auto-Fill Data", desc: "Get a complete resume example instantly." },
-                    { step: "03", title: "Edit Your Info", desc: "Update the name, skills, and experience." },
-                    { step: "04", title: "Download PDF", desc: "Get a high-quality, multi-page PDF." }
-                ].map((item, idx) => (
-                    <div key={idx} className="bg-gray-50 p-6 rounded-xl border border-gray-100 relative overflow-hidden">
-                        <div className="text-6xl font-black text-gray-200 absolute -top-4 -right-4 select-none">{item.step}</div>
-                        <h3 className="text-lg font-bold text-blue-900 relative z-10">{item.title}</h3>
-                        <p className="text-sm text-gray-600 mt-2 relative z-10">{item.desc}</p>
-                    </div>
-                ))}
-             </div>
-        </div>
-      </section>
       
       <section id="seo-content" className="px-6 lg:px-12 py-24 bg-gray-50 border-t border-gray-200">
          <div className="max-w-4xl mx-auto prose prose-blue prose-lg">
-            <h2 className="text-3xl font-black text-blue-900 mb-8">Your Guide to the Perfect Resume in 2026</h2>
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Why Use an AI Resume Builder?</h3>
+            <h2 className="text-3xl font-black text-blue-900 mb-8">Unlock Your Career Potential with India’s Best Free Document Tools</h2>
             <p className="text-gray-600 mb-6">
-                Creating a resume that stands out to both recruiters and Applicant Tracking Systems (ATS) is challenging. <strong>FormatHub's AI Resume Builder</strong> provides pre-filled, industry-specific templates that are already optimized. Whether you need a concise <em>1 page resume format for freshers</em> or a comprehensive <em>5 page resume for an academic role</em>, our tool adapts to your needs.
+                In today's competitive job market and fast-paced business environment, professional documentation is non-negotiable. FormatHub was created to empower every student, job seeker, and small business owner in India with access to high-quality, easy-to-use document generation tools, completely free of charge. Our suite of products is designed to save you time, eliminate guesswork, and help you present yourself in the most professional light possible.
             </p>
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Multi-Page Resumes: When to Use Them</h3>
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                    <h4 className="font-bold text-blue-900">1-2 Page Resumes</h4>
-                    <p className="text-sm text-gray-600 mt-2">Ideal for most professionals, including IT, Sales, and Marketing. A <strong>2 page resume template</strong> is perfect for candidates with over 5-10 years of relevant experience.</p>
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                    <h4 className="font-bold text-blue-900">3-5 Page Resumes</h4>
-                    <p className="text-sm text-gray-600 mt-2">Typically used in academia, medicine, or for senior executives with extensive publications, patents, or projects. Our tool lets you generate these detailed formats easily.</p>
-                </div>
-            </div>
+            
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">The Ultimate Free AI Resume Builder for the Indian Job Market</h3>
+            <p className="text-gray-600 mb-6">
+                Creating a resume that impresses recruiters and passes through automated Applicant Tracking Systems (ATS) is a significant challenge. <strong>FormatHub's AI Resume Builder</strong> is engineered to solve this problem. By simply selecting your job role—from a B.Tech fresher to a seasoned Sales Manager—our AI instantly provides a complete, industry-relevant resume draft. This isn't just a template; it's a content-rich starting point filled with appropriate skills, responsibilities, and project examples.
+            </p>
+            <p className="text-gray-600 mb-6">
+                We understand that one size doesn't fit all. That's why our tool offers unparalleled flexibility with <strong>multi-page resume options</strong>. Generate a crisp <em>1-page resume format for freshers</em> to make a strong first impression, a detailed <em>2-page resume template</em> for professionals with extensive experience, or even a comprehensive <em>5-page academic CV</em>. All templates are ATS-friendly, ensuring your application gets seen by human eyes.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">Professional Certificate Generator for Institutes and Training Centers</h3>
+            <p className="text-gray-600 mb-6">
+                For computer institutes and educational centers, a certificate is a testament to a student's achievement. Our <strong>Certificate Generator</strong> allows you to create stunning, official-looking certificates for courses like DCA and ADCA in minutes. Choose from over ten professional design themes, upload a student's photo for personalization, and add all necessary details. Each certificate can be downloaded as a high-resolution, print-ready PDF, complete with a unique QR code for digital verification, adding a layer of authenticity to your credentials.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">Instant Salary Slip & Experience Letter Generation for Small Businesses</h3>
+            <p className="text-gray-600 mb-6">
+                Managing HR documentation can be time-consuming for small businesses. Our <strong>Salary Slip Generator</strong> simplifies payroll by providing a standard Indian payslip format with automatic calculations for HRA, PF, and tax deductions. You can download the final slip in both PDF and editable Excel formats, offering maximum flexibility.
+            </p>
+            <p className="text-gray-600 mb-6">
+                Similarly, the <strong>Experience Letter Generator</strong> provides an HR-approved template for creating professional relieving and experience letters. Just fill in the employee's details, and you'll have an official document ready for issuance, ensuring a smooth and professional offboarding process for your employees.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">100% Free, Supported by Our Community</h3>
+            <p className="text-gray-600">
+                All these powerful tools on FormatHub are offered 100% free, forever. We believe in democratizing access to professional resources. The platform is supported by advertisements, which allows us to maintain and improve our services without ever charging our users. Start creating your professional documents today and take the next step in your career journey with FormatHub.
+            </p>
          </div>
       </section>
 
