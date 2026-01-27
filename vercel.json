@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/(BingSiteAuth\\.xml|robots\\.txt|sitemap\\.xml|ads\\.txt)",
+      "destination": "/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { CertificateData, ElementPosition, ThemeType } from '../types';
 import Certificate from './Certificate';
@@ -10,7 +9,7 @@ const INITIAL_DATA: CertificateData = {
   courseName: 'Advance Diploma in Computer Application',
   duration: '12 Months',
   grade: 'A+',
-  teacherName: '',
+  teacherName: 'S. K. VERMA',
   rollNumber: 'CERT/' + Math.floor(1000 + Math.random() * 9000) + '/' + new Date().getFullYear(),
   issueDate: new Date().toISOString().split('T')[0],
   photoUrl: null,
@@ -150,14 +149,17 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onBack }) =
                 { label: 'Father Name', name: 'fathersName' },
                 { label: 'Roll Number', name: 'rollNumber' },
                 { label: 'Course Name', name: 'courseName' },
-                { label: 'Duration', name: 'duration' },
+                { label: 'Duration (e.g. 6 Months)', name: 'duration' },
+                { label: 'Grade (A+, A, B)', name: 'grade' },
+                { label: 'Teacher / Director Name', name: 'teacherName' },
+                { label: 'Issue Date', name: 'issueDate', type: 'date' },
               ].map((field: any) => (
                 <div key={field.name} className="space-y-1">
                   <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">{field.label}</label>
                   {field.type === 'select' ? (
                     <select name={field.name} value={(data as any)[field.name]} onChange={handleInputChange} className="w-full px-3 py-2 border-2 border-gray-100 rounded-lg text-sm font-bold bg-white focus:border-blue-500 outline-none">{field.options.map((o: any) => <option key={o.id} value={o.id}>{o.name}</option>)}</select>
                   ) : (
-                    <input type="text" name={field.name} value={(data as any)[field.name]} onChange={handleInputChange} className="w-full px-3 py-2 border-2 border-gray-100 rounded-lg text-sm font-bold focus:border-blue-500 outline-none transition-colors" />
+                    <input type={field.type || "text"} name={field.name} value={(data as any)[field.name]} onChange={handleInputChange} className="w-full px-3 py-2 border-2 border-gray-100 rounded-lg text-sm font-bold focus:border-blue-500 outline-none transition-colors" />
                   )}
                 </div>
               ))}
