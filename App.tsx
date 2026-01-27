@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import LandingPage from './components/LandingPage';
 import CertificateGenerator from './components/CertificateGenerator';
@@ -92,14 +91,22 @@ const App: React.FC = () => {
       case '/certificate-generator':
         return (
           <>
-            <SEO title="Free Certificate Generator | Create & Download PDF" description="Easily create professional computer course certificates. Upload student name and photo, choose a design, and download a high-quality PDF for free on FormatHub.in." />
+            <SEO 
+              title="Free Certificate Generator | Create & Download PDF" 
+              description="Easily create professional computer course certificates (DCA, ADCA). Upload student name and photo, choose a design, and download a high-quality PDF for free." 
+              keywords="certificate generator, computer course certificate maker, dca certificate format, free certificate maker with photo, online certificate builder"
+            />
             <CertificateGenerator onBack={() => navigate('/')} />
           </>
         );
       case '/salary-slip-generator':
         return (
           <div className="min-h-screen bg-gray-100">
-            <SEO title="Free Salary Slip Generator | Download PDF/Excel" description="Generate professional salary slips with automatic calculations for HRA, PF, and taxes. Download in both PDF and editable Excel formats for free." />
+            <SEO 
+              title="Free Salary Slip Generator | Download PDF & Excel" 
+              description="Generate professional salary slips instantly. Automatic calculations for HRA, PF, and Tax. Download in PDF or editable Excel format for free." 
+              keywords="salary slip format in excel, online salary slip generator, payslip maker free, download salary slip pdf, simple salary slip format india, employee payslip generator, monthly salary slip calculator"
+            />
             {renderHeader('Salary Slip Generator')}
             <SalarySlipGenerator data={salaryData} onChange={handleSalaryChange} />
           </div>
@@ -107,7 +114,11 @@ const App: React.FC = () => {
       case '/experience-letter-generator':
         return (
           <div className="min-h-screen bg-gray-100">
-            <SEO title="Experience Letter Generator | Free PDF Download" description="Create official experience and relieving letters in a professional format. Fill in the details and download a print-ready PDF instantly." />
+            <SEO 
+              title="Experience Letter Generator | Free PDF Download" 
+              description="Create official experience and relieving letters in a professional format. Fill in the details and download a print-ready PDF instantly." 
+              keywords="experience letter format, relieving letter generator, work experience certificate, job experience letter pdf, free hr tools india"
+            />
             {renderHeader('Experience Letter Generator')}
             <ExperienceCertificate 
               data={experienceData} 
@@ -120,7 +131,11 @@ const App: React.FC = () => {
       case '/resume-builder':
         return (
           <div className="min-h-screen bg-gray-100 flex flex-col h-screen">
-            <SEO title="AI Resume Builder | 100+ Free ATS Templates (1-5 Pages)" description="India's best AI resume builder. Get pre-filled, ATS-friendly templates for any job role. Create and download a 1, 2, or 5-page professional resume in minutes." />
+            <SEO 
+              title="AI Resume Builder | 100+ Free ATS Templates (1-5 Pages)" 
+              description="India's best AI resume builder. Get pre-filled, ATS-friendly templates for any job role. Create and download a 1, 2, or 5-page professional resume in minutes." 
+              keywords="ai resume builder, free resume maker for freshers, ats resume templates, download resume pdf, cv maker india, biodata format for job"
+            />
             {renderHeader('AI Resume Builder')}
             <ResumeBuilder />
           </div>
@@ -128,7 +143,11 @@ const App: React.FC = () => {
       case '/image-resizer':
         return (
           <div className="min-h-screen bg-gray-50">
-             <SEO title="Govt Exam Photo Resizer (20kb - 50kb) | SSC, UPSC, IBPS" description="Resize and compress photos and signatures for SSC, UPSC, IBPS, NEET online forms. Convert image to 20kb, 50kb in cm/mm dimensions instantly." />
+             <SEO 
+               title="Govt Exam Photo Resizer (20kb - 50kb) | SSC, UPSC, IBPS" 
+               description="Resize and compress photos and signatures for SSC, UPSC, IBPS, NEET online forms. Convert image to 20kb, 50kb in cm/mm dimensions instantly." 
+               keywords="ssc photo resizer, image compressor 20kb to 50kb, resize photo for upsc, signature resizer for govt exam, photo resizer in cm, passport size photo maker online"
+             />
              {renderHeader('Image Resizer Tool')}
              <ImageResizer />
           </div>
@@ -136,7 +155,11 @@ const App: React.FC = () => {
       case '/jpg-to-pdf':
         return (
           <div className="min-h-screen bg-gray-50">
-             <SEO title="JPG to PDF Converter | Combine Photos to PDF Free" description="Convert multiple images (JPG/PNG) to a single PDF document online. Best for IGNOU assignments, SSC/UPSC documents, and ID proofs. Fast & Secure." />
+             <SEO 
+               title="JPG to PDF Converter | Combine Photos to PDF Free" 
+               description="Convert multiple images (JPG/PNG) to a single PDF document online. Best for IGNOU assignments, SSC/UPSC documents, and ID proofs. Fast & Secure." 
+               keywords="jpg to pdf converter, image to pdf, combine photos to pdf, convert handwritten notes to pdf, ignou assignment pdf maker, free pdf tools"
+             />
              {renderHeader('JPG to PDF Converter')}
              <ImageToPdf />
           </div>
@@ -144,7 +167,11 @@ const App: React.FC = () => {
       case '/poster-maker':
         return (
           <div className="min-h-screen bg-gray-50">
-             <SEO title="Free Online Poster Maker 2026 | Create Ads & Invites" description="Design professional business posters, festival greetings (Diwali/Eid), and event invitations online. Drag and drop, add photos, and download PNG." />
+             <SEO 
+               title="Free Online Poster Maker 2026 | Create Ads & Invites" 
+               description="Design professional business posters, festival greetings (Diwali/Eid), and event invitations online. Drag and drop, add photos, and download PNG." 
+               keywords="online poster maker, free graphic design tool, festival poster maker with photo, diwali poster maker, business flyer design free"
+             />
              {renderHeader('Poster Maker Tool')}
              <PosterMaker />
           </div>
@@ -158,7 +185,11 @@ const App: React.FC = () => {
       default:
         return (
           <>
-            <SEO title="FormatHub: Free AI Resume Builder & Document Generators" description="India's #1 free platform to create professional multi-page resumes with AI, generate salary slips, experience letters, and high-quality course certificates." />
+            <SEO 
+              title="FormatHub: Free AI Resume Builder & Document Generators" 
+              description="India's #1 free platform to create professional multi-page resumes with AI, generate salary slips, experience letters, and high-quality course certificates." 
+              keywords="formathub, free online tools, document generator, resume builder india, certificate maker, salary slip generator, pdf tools"
+            />
             <LandingPage navigate={navigate} />
           </>
         );
