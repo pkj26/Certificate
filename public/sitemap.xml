@@ -3,56 +3,56 @@
   <url>
     <loc>https://formathub.in/</loc>
     <priority>1.0</priority>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://formathub.in/resume-builder</loc>
     <priority>0.9</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://formathub.in/image-resizer</loc>
     <priority>0.9</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://formathub.in/jpg-to-pdf</loc>
     <priority>0.9</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://formathub.in/poster-maker</loc>
-    <priority>0.9</priority>
-    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://formathub.in/certificate-generator</loc>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://formathub.in/salary-slip-generator</loc>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://formathub.in/experience-letter-generator</loc>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://formathub.in/about</loc>
     <priority>0.5</priority>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://formathub.in/privacy</loc>
     <priority>0.5</priority>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://formathub.in/terms</loc>
     <priority>0.5</priority>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
   </url>
 </urlset>
