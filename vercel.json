@@ -2,8 +2,20 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/(BingSiteAuth\\.xml|robots\\.txt|sitemap\\.xml|ads\\.txt)",
-      "destination": "/$1"
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
+      "source": "/ads.txt",
+      "destination": "/ads.txt"
+    },
+    {
+      "source": "/BingSiteAuth.xml",
+      "destination": "/BingSiteAuth.xml"
     },
     {
       "source": "/(.*)",
