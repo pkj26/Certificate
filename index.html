@@ -4,65 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Google Search Console Verification - PASTE YOUR CODE BELOW -->
+    <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="8D17F5282A65781CD3411EF8A11BC0F2" />
     <meta name="msvalidate.01" content="8D17F5282A65781CD3411EF8A11BC0F2" />
 
+    <!-- Performance Hints: Preconnect to critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://esm.sh" crossorigin>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+
+    <!-- Critical Module Preload for faster FCP -->
+    <link rel="modulepreload" href="/index.tsx">
+    
     <!-- Custom Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231e3a8a' /><text x='50' y='70' font-family='sans-serif' font-size='50' font-weight='bold' fill='white' text-anchor='middle'>FH</text></svg>">
 
-    <!-- Google AdSense Auto Ads Script -->
+    <!-- Google AdSense Auto Ads Script - Async to prevent blocking -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9196805139260752" crossorigin="anonymous"></script>
 
-    <!-- SEO Meta Tags - HYPER OPTIMIZED FOR 1ST PAGE RANK -->
+    <!-- SEO Meta Tags -->
     <title>FormatHub: SSC Photo Resizer 20kb, UP Scholarship Status, Result 2026 & Resume Maker</title>
-    <meta name="description" content="FormatHub.in: Free SSC Photo Resizer 20kb-50kb, UP Scholarship Status 2026, PM Kisan Beneficiary List, Free AI Resume Builder & Computer Certificate Maker. Verified by 10 Lakh+ Students across India.">
-    <meta name="keywords" content="formathub, ssc photo resizer 20kb, up scholarship status 2026, pm kisan status check, up board result 2026 check, free resume builder, online salary slip maker, dca certificate download, image compressor to 20kb, photo resizer for upsc, formathub.in">
-    <meta name="author" content="FormatHub Team">
+    <meta name="description" content="FormatHub.in: Free SSC Photo Resizer 20kb-50kb, UP Scholarship Status 2026, PM Kisan Beneficiary List, Free AI Resume Builder & Computer Certificate Maker.">
+    <meta name="keywords" content="formathub, ssc photo resizer 20kb, up scholarship status 2026, pm kisan status check, up board result 2026 check, free resume builder">
     <link rel="canonical" href="https://formathub.in/" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://formathub.in/">
-    <meta property="og:title" content="FormatHub - All Govt Documents & Tools for India">
-    <meta property="og:description" content="Check UP Scholarship Status, PM Kisan, and resize photos for SSC/UPSC exams in seconds. 100% Free and Secure tool.">
-    <meta property="og:image" content="https://formathub.in/og-image.jpg">
-
-    <!-- JSON-LD Structured Data for Local/Organization SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "FormatHub India",
-      "url": "https://formathub.in",
-      "logo": "https://formathub.in/logo.png",
-      "sameAs": [
-        "https://www.facebook.com/formathub",
-        "https://twitter.com/formathub"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+91-000-000-0000",
-        "contactType": "customer service"
-      }
-    }
-    </script>
-
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Combined and optimized Google Fonts with font-display: swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Cinzel:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
     <style>
-        body { background-color: #ffffff; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        /* Critical CSS to prevent Layout Shift (CLS) and improve FCP */
+        body { background-color: #ffffff; font-family: 'Inter', system-ui, -apple-system, sans-serif; scroll-behavior: smooth; margin: 0; }
+        #root { min-height: 100vh; }
         .ticker-animate { animation: ticker 25s linear infinite; }
         @keyframes ticker {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
-        .gradient-text {
-            background: linear-gradient(90deg, #1e3a8a, #2563eb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        /* Fallback styling for fast visual feedback */
+        .loading-skeleton { background: #f3f4f6; height: 100vh; width: 100%; }
     </style>
+
 <script type="importmap">
 {
   "imports": {
@@ -77,10 +60,16 @@
 </script>
 </head>
 <body>
-    <div id="root"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <div id="root">
+        <!-- Minimal loading indicator for FCP -->
+        <div class="loading-skeleton"></div>
+    </div>
+    
+    <!-- Defer non-critical scripts -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
     <script type="module" src="/index.tsx"></script>
 </body>
 </html>
