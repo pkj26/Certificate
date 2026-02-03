@@ -3,7 +3,7 @@ import LandingPage from './components/LandingPage';
 import SEO from './components/SEO';
 import { SalaryData, ExperienceData } from './types';
 
-// Lazy load heavy components for better performance (Lighthouse 100)
+// Lazy load heavy components for maximum performance (Lighthouse 100)
 const CertificateGenerator = lazy(() => import('./components/CertificateGenerator'));
 const SalarySlipGenerator = lazy(() => import('./components/SalarySlipGenerator'));
 const ExperienceCertificate = lazy(() => import('./components/ExperienceCertificate'));
@@ -42,7 +42,14 @@ const App: React.FC = () => {
   }, []);
 
   const navigate = (path: string) => {
-    window.history.pushState({}, '', path);
+    // FIX: Wrapped pushState in try-catch to prevent SecurityError in restricted environments
+    try {
+      if (window.history.pushState) {
+        window.history.pushState({}, '', path);
+      }
+    } catch (e) {
+      console.warn("Navigation limited by environment security policy. Falling back to state-only routing.");
+    }
     setRoute(path);
     window.scrollTo(0, 0);
   };
@@ -76,47 +83,50 @@ const App: React.FC = () => {
 
   return (
     <Suspense fallback={<PageLoader />}>
-      {route === '/certificate-generator' ? (
+      {route.includes('certificate-generator') ? (
         <CertificateGenerator onBack={() => navigate('/')} />
-      ) : route === '/salary-slip-generator' ? (
+      ) : route.includes('salary-slip-generator') ? (
         <div className="min-h-screen bg-gray-100">
           {renderHeader('Salary Slip')}
           <SalarySlipGenerator data={salaryData} onChange={handleSalaryChange} />
         </div>
-      ) : route === '/experience-letter-generator' ? (
+      ) : route.includes('experience-letter-generator') ? (
         <div className="min-h-screen bg-gray-100">
           {renderHeader('Experience Letter')}
           <ExperienceCertificate data={experienceData} onChange={(e) => setExperienceData(prev => ({ ...prev, [e.target.name]: e.target.value }))} onDownload={handleExperienceDownload} previewRef={experiencePreviewRef} />
         </div>
-      ) : route === '/resume-builder' ? (
+      ) : route.includes('resume-builder') ? (
         <div className="min-h-screen bg-gray-100 flex flex-col h-screen">
           {renderHeader('Resume Builder')}
           <ResumeBuilder />
         </div>
-      ) : route === '/image-resizer' ? (
+      ) : route.includes('image-resizer') ? (
         <div className="min-h-screen bg-gray-50">
           {renderHeader('Image Resizer')}
           <ImageResizer />
         </div>
-      ) : route === '/jpg-to-pdf' ? (
+      ) : route.includes('jpg-to-pdf') ? (
         <div className="min-h-screen bg-gray-50">
           {renderHeader('Image to PDF')}
           <ImageToPdf />
         </div>
-      ) : route === '/poster-maker' ? (
+      ) : route.includes('poster-maker') ? (
         <div className="min-h-screen bg-gray-50">
           {renderHeader('Poster Maker')}
           <PosterMaker />
         </div>
-      ) : route === '/about' ? (
+      ) : route.includes('about') ? (
         <AboutUs onBack={() => navigate('/')} />
-      ) : route === '/privacy' ? (
+      ) : route.includes('privacy') ? (
         <PrivacyPolicy onBack={() => navigate('/')} />
-      ) : route === '/terms' ? (
+      ) : route.includes('terms') ? (
         <TermsOfService onBack={() => navigate('/')} />
       ) : (
         <>
-          <SEO title="FormatHub: Free Resume Builder & Document Tool" description="India's best free tool for SSC photo resizer, UP Scholarship status and DCA certificates." />
+          <SEO 
+            title="FormatHub: SSC Photo Resizer 20kb, UP Scholarship Status 2026 & Resume Maker" 
+            description="FormatHub.in: Free SSC Photo Resizer 20kb-50kb for CGL/CHSL. Check UP Scholarship Status 2026, PM Kisan List & Create Computer Certificates with Photo." 
+          />
           <LandingPage navigate={navigate} />
         </>
       )}
