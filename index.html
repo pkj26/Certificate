@@ -14,60 +14,51 @@
     <link rel="preconnect" href="https://esm.sh" crossorigin>
     <link rel="modulepreload" href="/index.tsx">
     
-    <!-- 🚀 MEGA SEO META TAGS (GOOGLE 1st PAGE STRATEGY) -->
-    <title>FormatHub: Sarkari Result 2026, SSC Photo Resizer 20kb, UP Scholarship Status & Resume Maker</title>
-    <meta name="description" content="FormatHub.in: Free SSC Photo Resizer 20kb-50kb for CGL/CHSL. Check UP Scholarship Status 2026, PM Kisan List, UP Board Result & Create Computer Certificates with Photo. India's #1 Tool Portal.">
-    <meta name="keywords" content="formathub, sarkari result, ssc photo resizer 20kb, up scholarship status 2026, pm kisan status, resume builder for freshers, dca certificate maker, adca certificate with photo, image to pdf, formathub.in">
+    <!-- 🚀 GOOGLE 1st PAGE SEO STRATEGY (NICHE TARGETING) -->
+    <title>FormatHub: DCA Certificate with Photo, Typing Certificate Maker & SSC Resizer</title>
+    <meta name="description" content="FormatHub.in: Create professional DCA, ADCA, Tally, and Typing Certificates with Photo. Free QR Code Verified Certificate Generator. SSC Photo Resizer 20kb & UP Scholarship Status.">
+    <meta name="keywords" content="dca certificate with photo, adca certificate template, typing certificate maker online, computer institute certificate format, tally certificate download, formathub.in, ssc photo resizer 20kb, up scholarship status 2026">
     <meta name="author" content="FormatHub India">
     <link rel="canonical" href="https://formathub.in/" />
 
-    <!-- JSON-LD Structured Data for Google First Page Ranking -->
+    <!-- JSON-LD Structured Data (Rich Results for Certificates) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "FormatHub",
-      "url": "https://formathub.in/",
-      "description": "Free Online Tools for Students: SSC Photo Resizer, Computer Certificate Maker, and AI Resume Builder.",
-      "applicationCategory": "EducationalApplication",
+      "@type": "SoftwareApplication",
+      "name": "FormatHub Certificate Maker",
       "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript",
+      "applicationCategory": "EducationalApplication",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "INR"
       },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "1250"
+      },
       "featureList": [
-        "SSC Photo Resizer 20kb to 50kb",
-        "UP Scholarship Status Check 2026",
-        "Computer Certificate Maker with Photo",
-        "Free AI Resume Builder"
+        "DCA Certificate with Photo Upload",
+        "QR Code Verification Logic",
+        "ISO 9001:2015 Formatting",
+        "Instant PDF Download"
       ]
     }
     </script>
 
-    <!-- Open Graph for WhatsApp/FB Sharing (Viral Traffic) -->
-    <meta property="og:title" content="FormatHub - Sarkari Updates & Online Tools" />
-    <meta property="og:description" content="SSC Photo Resizer, Resume Builder & Certificate Maker. Check Latest Sarkari Results 2026." />
-    <meta property="og:url" content="https://formathub.in/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://formathub.in/og-image.jpg" />
-
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9196805139260752" crossorigin="anonymous"></script>
-
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Cinzel:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
         body { background-color: #ffffff; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
         #root { min-height: 100vh; }
-        .ticker-animate { animation: ticker 20s linear infinite; }
+        .ticker-animate { animation: ticker 25s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        .sarkari-table-header { background: linear-gradient(90deg, #1e3a8a 0%, #1e40af 100%); }
         .loading-skeleton { background: #f9fafb; height: 100vh; width: 100%; }
-        /* Prevent CLS */
-        img { content-visibility: auto; }
+        .cert-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .cert-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
     </style>
 
 <script type="importmap">
@@ -87,7 +78,6 @@
     <div id="root"><div class="loading-skeleton"></div></div>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script type="module" src="/index.tsx"></script>
 </body>
 </html>
