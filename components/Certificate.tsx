@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { CertificateData, ElementPosition, ThemeType } from '../types';
 
@@ -10,7 +9,6 @@ interface CertificateProps {
   onPositionChange: (key: keyof CertificateData['positions'], pos: ElementPosition) => void;
 }
 
-// Theme Configuration Definitions
 const THEME_STYLES: Record<ThemeType, any> = {
   'classic': {
     wrapper: "border-[15px] border-double border-[#b8860b]",
@@ -26,7 +24,7 @@ const THEME_STYLES: Record<ThemeType, any> = {
     titleStyle: "italic tracking-wide"
   },
   'modern-blue': {
-    wrapper: "border-t-[20px] border-b-[20px] border-blue-600 bg-white shadow-xl",
+    wrapper: "border-t-[20px] border-b-[20px] border-blue-600 bg-white",
     bg: "linear-gradient(180deg, #eff6ff 0%, #ffffff 50%, #eff6ff 100%)",
     textPrimary: "text-blue-800",
     textSecondary: "text-slate-500",
@@ -54,16 +52,16 @@ const THEME_STYLES: Record<ThemeType, any> = {
   },
   'tech-green': {
     wrapper: "border-2 border-green-500 bg-black",
-    bg: "#0a0a0a", // Dark theme background
+    bg: "#0a0a0a",
     textPrimary: "text-green-500",
     textSecondary: "text-green-700",
     accent: "text-green-400",
-    headerFont: "Roboto", // Mono-ish feel
+    headerFont: "Roboto",
     bodyFont: "Roboto",
     showCorners: false,
     borderCol: "#22c55e",
     pattern: "hidden",
-    isDark: true, // Custom flag for dark mode adjustments
+    isDark: true,
     titleStyle: "uppercase tracking-[0.3em] font-light"
   },
   'royal-purple': {
@@ -174,7 +172,6 @@ const Certificate: React.FC<CertificateProps> = ({ data, certInfo, certificateRe
         photoUrl: data.photoUrl 
       };
       const encoded = btoa(JSON.stringify(essentialData));
-      // Use origin and path for a clean URL
       const baseUrl = `${window.location.origin}/certificate-generator`;
       return `${baseUrl}?d=${encoded}`;
     } catch (e) {
@@ -226,218 +223,189 @@ const Certificate: React.FC<CertificateProps> = ({ data, certInfo, certificateRe
     cursor: isEditMode ? 'move' : 'default',
     zIndex: dragging?.key === key ? 100 : 40,
     outline: isEditMode ? '2px dashed #3b82f6' : 'none',
-    outlineOffset: '4px'
+    outlineOffset: '4px',
+    position: 'absolute' as const
   });
 
   return (
     <div className="flex justify-center p-0 bg-gray-200 overflow-visible">
       <div 
         ref={certificateRef}
-        data-certificate-root
-        className={`relative w-[1123px] h-[794px] shadow-2xl overflow-hidden flex flex-col transition-all duration-500 ease-in-out ${theme.wrapper}`}
+        className={`relative w-[1123px] min-h-[794px] shadow-2xl overflow-visible flex flex-col transition-all duration-500 ease-in-out ${theme.wrapper}`}
         style={{ 
           background: theme.bg,
-          lineHeight: '1.4' 
+          lineHeight: '1.5' 
         }}
       >
-        {/* Verification Banner Overlay (Only on Scan) */}
         {isVerifiedView && (
           <div className="absolute top-10 left-1/2 -translate-x-1/2 z-[100] bg-green-600 text-white px-8 py-2 rounded-full shadow-2xl font-black tracking-[0.2em] border-2 border-white animate-bounce">
             OFFICIALLY APPROVED & VERIFIED
           </div>
         )}
 
-        {/* Background Watermark/Pattern */}
         <div className={`absolute inset-0 flex items-center justify-center pointer-events-none select-none ${theme.pattern || 'opacity-5'}`}>
-          <div className={`text-[100px] font-bold rotate-[-30deg] border-[20px] rounded-full p-20 uppercase tracking-[15px] ${theme.textPrimary}`} style={{ borderColor: 'currentColor' }}>
+          <div className={`text-[120px] font-bold rotate-[-30deg] border-[25px] rounded-full p-24 uppercase tracking-[20px] ${theme.textPrimary}`} style={{ borderColor: 'currentColor' }}>
             VERIFIED
           </div>
         </div>
 
-        {/* Decorative Corners - Conditional */}
         {theme.showCorners && (
           <>
-            <div className={`absolute top-0 left-0 w-24 h-24 border-t-[8px] border-l-[8px] m-4 ${theme.cornerColor || 'border-[#8b4513]'}`}></div>
-            <div className={`absolute top-0 right-0 w-24 h-24 border-t-[8px] border-r-[8px] m-4 ${theme.cornerColor || 'border-[#8b4513]'}`}></div>
-            <div className={`absolute bottom-0 left-0 w-24 h-24 border-b-[8px] border-l-[8px] m-4 ${theme.cornerColor || 'border-[#8b4513]'}`}></div>
-            <div className={`absolute bottom-0 right-0 w-24 h-24 border-b-[8px] border-r-[8px] m-4 ${theme.cornerColor || 'border-[#8b4513]'}`}></div>
+            <div className={`absolute top-0 left-0 w-24 h-24 border-t-[8px] border-l-[8px] m-4 z-20 ${theme.cornerColor || 'border-[#8b4513]'}`}></div>
+            <div className={`absolute top-0 right-0 w-24 h-24 border-t-[8px] border-r-[8px] m-4 z-20 ${theme.cornerColor || 'border-[#8b4513]'}`}></div>
+            <div className={`absolute bottom-0 left-0 w-24 h-24 border-b-[8px] border-l-[8px] m-4 z-20 ${theme.cornerColor || 'border-[#8b4513]'}`}></div>
+            <div className={`absolute bottom-0 right-0 w-24 h-24 border-b-[8px] border-r-[8px] m-4 z-20 ${theme.cornerColor || 'border-[#8b4513]'}`}></div>
           </>
         )}
 
-        <div className="relative z-10 px-16 pt-10 pb-6 h-full flex flex-col items-center">
+        <div className="relative z-10 px-16 pt-12 pb-12 flex-1 flex flex-col items-center">
           
-          {/* Top Info Header */}
-          <div className={`w-full flex justify-between mb-4 border-b pb-2 ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+          <div className={`w-full flex justify-between mb-6 border-b-2 pb-3 ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
             <div className="text-left">
-              <span className={`block text-[10px] font-black uppercase ${theme.textPrimary}`}>Roll Number:</span>
-              <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-black'}`}>{data.rollNumber || 'NOT ISSUED'}</span>
+              <span className={`block text-[11px] font-black uppercase tracking-widest ${theme.textPrimary}`}>Roll Number:</span>
+              <span className={`text-base font-bold ${isDark ? 'text-white' : 'text-black'}`}>{data.rollNumber || 'PENDING'}</span>
             </div>
             <div className="text-right">
-              <span className={`block text-[10px] font-black uppercase ${theme.textPrimary}`}>Issue Date:</span>
-              <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-black'}`}>{data.issueDate || 'NOT ISSUED'}</span>
+              <span className={`block text-[11px] font-black uppercase tracking-widest ${theme.textPrimary}`}>Issue Date:</span>
+              <span className={`text-base font-bold ${isDark ? 'text-white' : 'text-black'}`}>{data.issueDate || 'PENDING'}</span>
             </div>
           </div>
 
-          {/* Header Section */}
-          <div className="flex justify-between w-full items-start mb-6">
+          <div className="flex justify-between w-full items-start mb-8 gap-8">
              <div className="text-left w-1/4 pt-4">
-                <p className={`text-[10px] font-bold uppercase tracking-[0.1em] ${theme.textSecondary}`}>ISO 9001:2015</p>
-                <p className={`text-[10px] font-bold uppercase tracking-[0.1em] mt-1 ${theme.textSecondary}`}>Reg ID: {certInfo.id}</p>
+                <p className={`text-[12px] font-black uppercase tracking-[0.2em] ${theme.textSecondary}`}>ISO 9001:2015</p>
+                <p className={`text-[12px] font-black uppercase tracking-[0.2em] mt-2 ${theme.textSecondary}`}>Reg ID: {certInfo.id}</p>
              </div>
              <div className="text-center w-2/4">
-                <h1 className={`text-3xl font-bold tracking-[0.1em] mb-1 uppercase leading-snug ${theme.textPrimary}`} style={{ fontFamily: theme.headerFont }}>
-                  {data.institutionName || 'NATIONAL INSTITUTE OF TECHNOLOGY'}
+                <h1 className={`text-4xl font-black tracking-tighter mb-2 uppercase leading-none ${theme.textPrimary}`} style={{ fontFamily: theme.headerFont }}>
+                  {data.institutionName || 'NATIONAL INSTITUTE'}
                 </h1>
-                <p className={`text-[11px] font-semibold tracking-[0.2em] uppercase ${theme.accent}`}>
-                  (Registered under Govt. of India / Ministry of MSME)
+                <p className={`text-[12px] font-black tracking-[0.3em] uppercase ${theme.accent}`}>
+                  (Ministry of MSME Govt. of India Registered)
                 </p>
              </div>
              <div className="w-1/4 flex justify-end">
-                <div className={`p-1 border shadow-md flex flex-col items-center ${isDark ? 'bg-white border-none' : 'bg-white border-gray-200'}`}>
+                <div className={`p-1.5 border-2 shadow-xl flex flex-col items-center rounded-lg ${isDark ? 'bg-white border-transparent' : 'bg-white border-gray-100'}`}>
                    <img 
-                    src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(verificationUrl)}&bgcolor=ffffff`} 
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=${encodeURIComponent(verificationUrl)}&bgcolor=ffffff`} 
                     alt="Scan to Verify" 
-                    className="w-[80px] h-[80px] block"
+                    className="w-[90px] h-[90px] block"
                    />
-                   <span className="text-[7px] mt-1 uppercase font-black tracking-tighter text-black">Verified QR Code</span>
+                   <span className="text-[8px] mt-1.5 uppercase font-black tracking-tighter text-black">Scan to Verify Authenticity</span>
                 </div>
              </div>
           </div>
 
-          <div className="w-full h-[2px] mb-10" style={{ background: `linear-gradient(to right, transparent, ${theme.borderCol}, transparent)` }}></div>
+          <div className="w-full h-[3px] mb-12" style={{ background: `linear-gradient(to right, transparent, ${theme.borderCol}, transparent)` }}></div>
 
-          {/* Main Content Body */}
-          <div className="text-center w-full flex-1 flex flex-col items-center justify-center py-2">
-            <h2 className={`text-6xl font-normal mb-8 ${theme.titleStyle} ${isDark ? 'text-gray-100' : 'text-gray-800'}`} style={{ fontFamily: theme.bodyFont }}>
+          <div className="text-center w-full flex-1 flex flex-col items-center justify-center py-4 space-y-8">
+            <h2 className={`text-7xl font-normal leading-tight ${theme.titleStyle} ${isDark ? 'text-gray-100' : 'text-gray-800'}`} style={{ fontFamily: theme.bodyFont }}>
               Certificate of Excellence
             </h2>
-            <p className={`text-xl mb-10 font-light italic tracking-[0.1em] ${theme.textSecondary}`}>This is to certify that the candidate</p>
             
-            <div className="mb-10">
-              <h3 className={`text-5xl font-bold border-b-2 border-dashed inline-block px-12 pb-2 uppercase tracking-[0.05em] ${theme.textPrimary}`} style={{ fontFamily: 'Playfair Display', borderColor: theme.borderCol + (isDark ? 'FF' : '40') }}>
-                {data.studentName || 'Student Name'}
+            <p className={`text-2xl font-light italic tracking-[0.1em] ${theme.textSecondary}`}>This document acknowledges that</p>
+            
+            <div className="w-full">
+              <h3 className={`text-6xl font-black border-b-4 border-double inline-block px-16 pb-4 uppercase tracking-tighter ${theme.textPrimary}`} style={{ fontFamily: 'Playfair Display', borderColor: theme.borderCol }}>
+                {data.studentName || 'Full Name'}
               </h3>
             </div>
 
-            <div className="mb-8">
-              <p className={`text-2xl ${theme.textSecondary}`}>
-                Son/Daughter of <span className={`font-semibold underline decoration-dotted decoration-gray-400 underline-offset-8 ${isDark ? 'text-white' : 'text-gray-900'}`}>{data.fathersName || 'Father/Guardian Name'}</span>
-              </p>
-            </div>
+            <p className={`text-3xl ${theme.textSecondary}`}>
+              Son/Daughter of <span className={`font-black underline decoration-double decoration-gray-300 underline-offset-8 ${isDark ? 'text-white' : 'text-gray-900'}`}>{data.fathersName || 'Guardian Name'}</span>
+            </p>
 
-            <div className="max-w-4xl mx-auto space-y-4">
-              <p className={`text-lg leading-relaxed tracking-wide ${theme.textSecondary}`}>
-                has successfully completed the diploma course in
+            <div className="max-w-4xl mx-auto space-y-6">
+              <p className={`text-2xl leading-relaxed tracking-wide ${theme.textSecondary}`}>
+                has successfully completed the diploma program in
               </p>
-              <h4 className={`text-3xl font-extrabold uppercase tracking-widest py-1 border-y border-transparent px-8 inline-block ${theme.textPrimary}`}>
+              <h4 className={`text-4xl font-black uppercase tracking-[0.1em] py-4 px-12 inline-block border-y-2 border-transparent ${theme.textPrimary}`}>
                 {data.courseName || 'Computer Application Program'}
               </h4>
-              <p className={`text-lg leading-relaxed tracking-wide ${theme.textSecondary}`}>
-                of <span className={`font-bold mx-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{data.duration || 'Duration'}</span> and achieved grade <span className={`font-bold mx-1 ${theme.textPrimary}`}>"{data.grade || 'A'}"</span>.
+              <p className={`text-2xl leading-relaxed tracking-wide ${theme.textSecondary}`}>
+                with a duration of <span className={`font-black mx-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{data.duration}</span> and secured Grade <span className={`font-black mx-1 text-3xl ${theme.textPrimary}`}>"{data.grade}"</span>.
               </p>
               
-              {/* Display Teacher Name if available */}
               {data.teacherName && (
-                <p className={`text-md mt-4 font-bold italic opacity-80 ${theme.textSecondary}`}>
-                  Under the guidance of {data.teacherName}
+                <p className={`text-lg mt-6 font-black italic opacity-90 ${theme.textSecondary}`}>
+                  Course Instructor: Prof. {data.teacherName}
                 </p>
               )}
             </div>
           </div>
 
-          {/* Footer Grid - Photo & Signatures */}
-          <div className="grid grid-cols-3 w-full mt-8 items-end relative min-h-[250px]">
-            {/* Left - Approved Stamp */}
-            <div className="text-left pb-10 pl-4">
-               {isVerifiedView && (
-                 <div className="border-2 border-green-600 rounded p-2 inline-block -rotate-12 opacity-80 bg-white/10 backdrop-blur-sm">
-                   <p className="text-green-600 font-black text-xl leading-none">APPROVED</p>
-                   <p className="text-green-600 font-bold text-[8px] uppercase">Digi-Verified</p>
-                 </div>
-               )}
-            </div>
-            
-            {/* Student Photo Container - Fixed Z-Index & Visibility */}
-            <div className="flex justify-center relative z-50">
+          <div className="w-full mt-16 flex justify-between items-end relative min-h-[220px]">
+            <div className="flex flex-col items-center space-y-4">
               <div 
                 onMouseDown={(e) => handleMouseDown('photo', e)}
                 style={getStyle('photo')}
-                className={`w-32 h-40 border-[3px] rounded bg-white flex items-center justify-center overflow-hidden shadow-2xl relative select-none`}
-                // Use inline style for border color as utility classes might conflict with dynamic values
+                className={`w-36 h-48 border-[4px] rounded-lg bg-white flex items-center justify-center overflow-hidden shadow-2xl select-none`}
                 ref={(el) => { if(el) el.style.borderColor = theme.borderCol; }}
               >
                 {data.photoUrl ? (
-                  <img 
-                    key={data.photoUrl} // Use key to force reload
-                    src={data.photoUrl} 
-                    alt="Student Photograph" 
-                    className="w-full h-full object-cover pointer-events-none block opacity-100 visible"
-                    style={{ minWidth: '100%', minHeight: '100%' }}
-                  />
+                  <img src={data.photoUrl} alt="Photo" className="w-full h-full object-cover pointer-events-none block" />
                 ) : (
                   <div className="text-center p-4">
-                    <svg className="w-16 h-16 text-gray-300 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-20 h-20 text-gray-200 mx-auto" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-400 text-[10px] uppercase block mt-2 font-black">Portrait Area</span>
+                    <span className="text-gray-300 text-[10px] uppercase block mt-2 font-black">Photo Here</span>
                   </div>
                 )}
-                <div className={`absolute top-0 right-0 text-white text-[7px] px-2 py-0.5 font-black uppercase tracking-tighter`} style={{ backgroundColor: theme.borderCol }}>Verified</div>
+                <div className={`absolute top-0 right-0 text-white text-[8px] px-3 py-1 font-black uppercase tracking-widest`} style={{ backgroundColor: theme.borderCol }}>OFFICIAL</div>
               </div>
             </div>
 
-            {/* Signature & Official Stamp Section */}
-            <div className="text-right flex flex-col items-end space-y-12 relative pr-4 min-w-[220px]">
-               {/* THE OFFICIAL RUBBER STAMP */}
+            <div className="flex flex-col items-center relative w-1/3">
                <div 
                   onMouseDown={(e) => handleMouseDown('stamp', e)}
                   style={getStyle('stamp')}
-                  className="absolute -top-16 -left-12 w-40 h-40 opacity-80 transform rotate-[-15deg] select-none"
+                  className="w-44 h-44 opacity-90 transform -rotate-12 select-none"
                >
-                  <div className={`w-full h-full rounded-full border-[4px] flex items-center justify-center relative bg-transparent`} style={{ borderColor: isDark ? theme.borderCol : '#4c1d95' }}>
-                    <div className={`w-[92%] h-[92%] rounded-full border border-dashed`} style={{ borderColor: isDark ? theme.borderCol : '#4c1d95' }}></div>
-                    <div className={`absolute inset-0 flex flex-col items-center justify-center font-black leading-none text-center`} style={{ color: isDark ? theme.borderCol : '#4c1d95' }}>
-                       <span className="text-[7px] uppercase mb-1 font-black px-2">Board of Computer Education</span>
-                       <div className="relative h-6 w-24 flex items-center justify-center">
-                          <span className="text-2xl font-bold italic opacity-90 absolute" style={{ fontFamily: 'Great Vibes', transform: 'rotate(-5deg)' }}>
-                             S.A. Khan
+                  <div className={`w-full h-full rounded-full border-[5px] flex items-center justify-center relative bg-white/10 backdrop-blur-sm`} style={{ borderColor: theme.borderCol }}>
+                    <div className={`w-[90%] h-[90%] rounded-full border-2 border-dashed`} style={{ borderColor: theme.borderCol }}></div>
+                    <div className={`absolute inset-0 flex flex-col items-center justify-center font-black leading-tight text-center p-2`} style={{ color: theme.borderCol }}>
+                       <span className="text-[8px] uppercase font-black">Technical Education Board</span>
+                       <div className="relative h-8 w-28 flex items-center justify-center overflow-hidden">
+                          <span className="text-3xl font-bold italic opacity-80 absolute" style={{ fontFamily: 'Great Vibes' }}>
+                             Authority
                           </span>
                        </div>
-                       <span className="text-[11px] uppercase border-y-2 py-1 tracking-tighter font-black w-[80%]" style={{ borderColor: isDark ? theme.borderCol : '#4c1d95' }}>APPROVED SEAL</span>
-                       <span className="text-[7px] uppercase mt-1 font-black">Regd. Authority</span>
+                       <span className="text-[12px] uppercase border-y-2 py-1 tracking-widest font-black w-full" style={{ borderColor: theme.borderCol }}>VALIDATED</span>
+                       <span className="text-[8px] uppercase mt-1 font-black">Regd. Controller</span>
                     </div>
                   </div>
                </div>
+            </div>
 
-               <div onMouseDown={(e) => handleMouseDown('signature1', e)} style={getStyle('signature1')} className="w-52 text-center select-none pt-2">
-                  <div className={`text-3xl font-bold italic h-10 flex items-end justify-center tracking-wide ${theme.textPrimary}`} style={{ fontFamily: 'Great Vibes' }}>S. K. Verma</div>
-                  <div className={`w-full h-[2px] mt-1`} style={{ backgroundColor: theme.borderCol }}></div>
-                  <p className={`text-[10px] font-black mt-1 uppercase tracking-widest ${theme.textPrimary}`}>Controller of Examination</p>
+            <div className="flex flex-col space-y-12 w-1/3">
+               <div onMouseDown={(e) => handleMouseDown('signature1', e)} style={getStyle('signature1')} className="w-full text-center select-none pt-4">
+                  <div className={`text-4xl font-black italic h-12 flex items-end justify-center tracking-wide ${theme.textPrimary}`} style={{ fontFamily: 'Great Vibes' }}>S. K. Verma</div>
+                  <div className={`w-full h-[2px] mt-2`} style={{ backgroundColor: theme.borderCol }}></div>
+                  <p className={`text-[12px] font-black mt-2 uppercase tracking-[0.2em] ${theme.textPrimary}`}>Controller Exam</p>
                </div>
                
-               <div onMouseDown={(e) => handleMouseDown('signature2', e)} style={getStyle('signature2')} className="w-52 text-center select-none pt-2">
-                  <div className={`text-3xl font-bold italic h-10 flex items-end justify-center tracking-wide ${theme.textPrimary}`} style={{ fontFamily: 'Great Vibes' }}>Rajiv Kapoor</div>
-                  <div className={`w-full h-[2px] mt-1`} style={{ backgroundColor: theme.borderCol }}></div>
-                  <p className={`text-[10px] font-black mt-1 uppercase tracking-widest ${theme.textPrimary}`}>Director General</p>
+               <div onMouseDown={(e) => handleMouseDown('signature2', e)} style={getStyle('signature2')} className="w-full text-center select-none pt-4">
+                  <div className={`text-4xl font-black italic h-12 flex items-end justify-center tracking-wide ${theme.textPrimary}`} style={{ fontFamily: 'Great Vibes' }}>Rajiv Kapoor</div>
+                  <div className={`w-full h-[2px] mt-2`} style={{ backgroundColor: theme.borderCol }}></div>
+                  <p className={`text-[12px] font-black mt-2 uppercase tracking-[0.2em] ${theme.textPrimary}`}>Managing Director</p>
                </div>
             </div>
           </div>
 
-          {/* Bottom Branding & Verification Message */}
-          <div className={`w-full flex justify-between items-center text-[9px] uppercase tracking-widest mt-10 border-t pt-4 ${isDark ? 'border-gray-700 text-gray-400' : 'border-gray-100 text-gray-500'}`}>
-             <span className={`font-bold ${theme.textPrimary}`}>Certificate ID: {data.rollNumber || certInfo.id}</span>
-             <span className={`text-center font-bold italic flex-1 px-8 truncate tracking-normal ${theme.textPrimary}`} style={{ opacity: 0.6 }}>
-                {certInfo.verificationText} | Digital Copy at verify.formathub.in
+          <div className={`w-full flex justify-between items-center text-[10px] uppercase tracking-[0.4em] mt-16 border-t-2 pt-6 ${isDark ? 'border-gray-700 text-gray-400' : 'border-gray-100 text-gray-500'}`}>
+             <span className={`font-black ${theme.textPrimary}`}>CERT ID: {data.rollNumber || certInfo.id}</span>
+             <span className={`text-center font-bold italic flex-1 px-12 truncate ${theme.textPrimary}`} style={{ opacity: 0.7 }}>
+                {certInfo.verificationText} | verify at verify.formathub.in
              </span>
-             <span className={`font-bold ${theme.textPrimary}`}>© 2024 GOVERNMENT APPROVED</span>
+             <span className={`font-black ${theme.textPrimary}`}>© 2026 OFFICIAL DOCUMENT</span>
           </div>
 
-          {/* Golden Seal of Quality */}
-          <div className="absolute bottom-20 left-12 w-24 h-24 rounded-full bg-gradient-to-br from-yellow-300 via-yellow-600 to-yellow-800 border-[3px] border-yellow-200 shadow-2xl flex items-center justify-center transform rotate-12">
-             <div className="w-20 h-20 rounded-full border border-yellow-100 flex flex-col items-center justify-center text-white p-1 text-center">
-                <span className="text-[8px] font-black tracking-tighter">GOVT</span>
-                <span className="text-[11px] font-black border-y border-yellow-100 my-1 px-2 tracking-tighter uppercase">REGD.</span>
-                <span className="text-[8px] font-black tracking-tighter">OFFICIAL</span>
+          <div className="absolute bottom-24 left-16 w-28 h-28 rounded-full bg-gradient-to-br from-yellow-200 via-yellow-600 to-yellow-900 border-[4px] border-yellow-100 shadow-2xl flex items-center justify-center transform rotate-12 z-30">
+             <div className="w-24 h-24 rounded-full border-2 border-yellow-200 flex flex-col items-center justify-center text-white p-2 text-center">
+                <span className="text-[10px] font-black tracking-tighter">QUALITY</span>
+                <span className="text-[13px] font-black border-y-2 border-yellow-200 my-1 px-3 tracking-tighter uppercase">ASSURED</span>
+                <span className="text-[10px] font-black tracking-tighter">OFFICIAL</span>
              </div>
           </div>
         </div>
